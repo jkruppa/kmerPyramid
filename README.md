@@ -1,2 +1,2 @@
-# basePyramid
+# kmerPyramid
 This is a small test file...
