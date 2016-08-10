@@ -5,6 +5,10 @@ Authors: Jochen Kruppa [aut], Klaus Jung [aut, cre]
 Description: What the package does (one paragraph).
 Depends:
     R (>= 3.2.3)
+Imports:
+    ShortRead (>= 1.28.0),
+    Biostrings (>= 2.38.4),
+    plyr (>= 1.8.4)
 License: $license
 Encoding: UTF-8
 LazyData: true

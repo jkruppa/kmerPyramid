@@ -1,0 +1,82 @@
+##' Text
+##'
+##' Text
+##' @title Get the k-mer distribution from a sequence 
+##' @param seq Sequence of characters 
+##' @param kmers vector of wanted k-mers
+##' @return data.frame
+##' @author Jochen Kruppa
+##' @export
+getKmerDistribution <- function(seq, kmers = c(1,2,3,4,5)){
+    kmerDistList <- llply(kmers, function(kmer){
+        countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))
+        denom <- apply(countDf, 1, sum)
+        percentageDf <- countDf/ifelse(denom == 0, 1, denom)
+        return(percentageDf)
+    }, .parallel = TRUE)
+    kmerDistDf <- do.call(cbind, kmerDistList)
+    return(kmerDistDf)
+}
+
+##' Text description
+##'
+##' Details
+##' @title Calculate number of reads given the coverage and genome size
+##' @param coverage Wanted coverage
+##' @param readLength Given read length
+##' @param genomeSize Size of the genome in bases
+##' @return numeric, number of reads
+##' @author Jochen Kruppa
+##' @export
+getReadsNum <- function(coverage, readLength, genomeSize) {
+    floor(coverage * genomeSize / readLength)
+}
+
+##' Text
+##'
+##' Description
+##' @title Generate paired reads from a given genome
+##' @param numReads Number of wanted reads
+##' @param initSequence Original genome sequence to draw reads from
+##' @param readLength Wanted read length in bases
+##' @param readMeanDist Mean distance between the paired reads (default = 50)
+##' @param files Vector of two named files ("R1", "R2") to save the generated reads
+##' @param parallel_flag Should everything done in parallel (not recommended). 
+##' @return NULL
+##' @author Jochen Kruppa
+##' @export
+generatePairedReads <- function(numReads = 10, initSequence, readLength = 150,
+                                 readMeanDist = 50, files, parallel_flag = FALSE) {
+    ## get the reads
+    l_ply(1:numReads, function(...) {
+        ## distance of the paired reads
+        readDist <- rpois(1, readMeanDist)
+        ## read total range
+        readRange <- 2*readLength + readDist
+        maxValue <- width(initSequence) - readRange
+        ## get the read start positions
+        startPosR1 <- sample(1:maxValue, 1)
+        startPosR2 <- startPosR1 + readLength + readDist
+        ## R1 is easy...
+        R1 <- subseq(initSequence, startPosR1, startPosR1 + readLength - 1)
+        names(R1) <- "R1"
+        ## R2 with the reverse sequence and the complement bases
+        R2pre <- subseq(initSequence, startPosR2, startPosR2 + readLength - 1)
+        R2 <- complement(Biostrings::reverse(R2pre)) ## complement of the sequence
+        names(R2) <- "R2"
+        ## write out both reads to separate files
+        writeFasta(R1, files[["R1"]], mode = "a")
+        writeFasta(R2, files[["R2"]], mode = "a")
+    }, .parallel = parallel_flag)
+}
+
+
+
+
+
+
+
+
+
+
+
