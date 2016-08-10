@@ -20,6 +20,6 @@ Test title for later
 Test title for later
 }
 \author{
-Jochen Kruppa
+Klaus Jung
 }
 

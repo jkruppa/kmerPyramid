@@ -6,7 +6,7 @@
 ##' @param dat 
 ##' @param nlines 
 ##' @return NULL
-##' @author Jochen Kruppa
+##' @author Klaus Jung
 ##' @export
 read.fastq = function(path, dat, nlines=0) {
 	f1 = paste(path1, file1, sep="")
@@ -38,7 +38,7 @@ read.fastq = function(path, dat, nlines=0) {
 ##' @param plot 
 ##' @param title 
 ##' @return NULL
-##' @author Jochen Kruppa
+##' @author Klaus Jung
 ##' @export
 translate.phred = function(QS, plot=TRUE, title="") {
 	qcode = unlist(strsplit("#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~", ""))
