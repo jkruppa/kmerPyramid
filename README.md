@@ -6,7 +6,7 @@ Get the released version from CRAN:
 
 ```R
 ## not available yet
-install.packages("kmerPyramid")
+## install.packages("kmerPyramid")
 ```
 
 Or the development version from github:
