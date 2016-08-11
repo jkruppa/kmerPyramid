@@ -7,6 +7,11 @@
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
-baseFunction <- function(foo, bar){
+kmerPyramid <- function(sampleKmerDistribution, virusKmerDistribution = NULL){
+    if(is.null(virusKmerDistribution)){
+        load("../data/virusKmerDistribution.rda")
+    }
+    
+    
     print(foo)
 }
