@@ -1,4 +1,6 @@
-## kmerPyramid
+# kmerPyramid
+
+![Screenshot](kmerPlot.png)
 
 ## Installation
 
