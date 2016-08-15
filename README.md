@@ -1,5 +1,7 @@
 # kmerPyramid
 
+R package to visualize the kmer distribution between samples
+
 <p align="center">
   <img src="kmerPlot.png" width="400">
 </p>
