@@ -1,6 +1,6 @@
 # kmerPyramid
 
-<img src="kmerPlot.png" width="200">
+<img src="kmerPlot.png" width="400">
 
 
 ## Installation
