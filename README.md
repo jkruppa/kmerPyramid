@@ -1,6 +1,6 @@
 # kmerPyramid
 
-![Screenshot](kmerPlot.png = 100x100)
+![Screenshot](kmerPlot.png){:height="36px" width="36px"}.
 
 ## Installation
 
