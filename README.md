@@ -1,6 +1,6 @@
 # kmerPyramid
 
-![Screenshot](kmerPlot.png)
+![Screenshot](kmerPlot.png = 100x100)
 
 ## Installation
 
