@@ -3,8 +3,11 @@
 R package to visualize the kmer distribution between samples
 
 <p align="center">
-  <img src="kmerPlot.png" width="400">
+  <img src="img/kmerPlot.png" width="400">
+  <img src="img/animated_pyramide.gif" width="400">
 </p>
+
+
 
 ## Installation
 
