@@ -1,18 +1,23 @@
-##' Test title for later
+##' Function to read in fastq files
 ##'
-##' Test title for later
-##' @title Test title for later
-##' @param path 
-##' @param dat 
-##' @param nlines 
-##' @return NULL
+##' Function to read in fastq files
+##' @title Function to read in fastq files
+##' @param path path to the fastq file
+##' @param nlines number of lines to read in 
+##' @return
+##' A list containing the following elements:
+##' \describe{
+##' \item{\emph{ids}}{The ids of the reads i.e. the names of the reads}
+##' \item{\emph{reads}}{The read as character}
+##' \item{\emph{phreds}}{The phreds scores per read as character}
+##' }
 ##' @author Klaus Jung
 ##' @export
-read.fastq = function(path, dat, nlines=0) {
-	f1 = paste(path1, file1, sep="")
+read.fastq = function(path, nlines=0) {
+	f1 = paste(path, file, sep="")
 	if (nlines==0) {
-		print("Determining number of reads in file")
-		nlines = countLines(f1)
+            print("Determining number of reads in file")
+            nlines = countLines(f1)
 	}
 	nreads = nlines/4
 	ids = as.character(rep(NA, nreads))

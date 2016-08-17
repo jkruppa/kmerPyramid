@@ -8,6 +8,7 @@
 #' \describe{
 #'   \item{id}{Name of the virus}
 #'   \item{A}{Percentage of nucleic acid base A in the 1-mers}
+#'   \item{...}{...}
 #'   \item{TTTTT}{Percentage of nucleic acid mer TTTTT in the 5-mers}
 #' }
 #' @source \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC99098/}

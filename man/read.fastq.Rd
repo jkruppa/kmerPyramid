@@ -2,22 +2,28 @@
 % Please edit documentation in R/utility.R
 \name{read.fastq}
 \alias{read.fastq}
-\title{Test title for later}
+\title{Function to read in fastq files}
 \usage{
-read.fastq(path, dat, nlines = 0)
+read.fastq(path, nlines = 0)
 }
 \arguments{
-\item{path}{}
+\item{path}{path to the fastq file}
 
-\item{dat}{}
-
-\item{nlines}{}
+\item{nlines}{number of lines to read in}
+}
+\value{
+A list containing the following elements:
+\describe{
+\item{\emph{ids}}{The ids of the reads i.e. the names of the reads}
+\item{\emph{reads}}{The read as character}
+\item{\emph{phreds}}{The phreds scores per read as character}
+}
 }
 \description{
-Test title for later
+Function to read in fastq files
 }
 \details{
-Test title for later
+Function to read in fastq files
 }
 \author{
 Klaus Jung
