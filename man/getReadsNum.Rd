@@ -2,7 +2,8 @@
 % Please edit documentation in R/kmerDistribution.R
 \name{getReadsNum}
 \alias{getReadsNum}
-\title{Calculate number of reads given the coverage and genome size}
+\title{Calculate number of reads given the coverage and genome
+    size}
 \usage{
 getReadsNum(coverage, readLength, genomeSize)
 }
@@ -17,12 +18,18 @@ getReadsNum(coverage, readLength, genomeSize)
 numeric, number of reads
 }
 \description{
-Text description
+The function calculates the needed reads given a coverage and the
+genome size
 }
 \details{
-Details
+The calulation is done by the formula of Lander and Waterman (1988).
 }
 \author{
 Jochen Kruppa
+}
+\references{
+Lander, E. S. and Waterman, M. S. (1988). Genomic
+    mapping by fingerprinting random clones: A mathematical
+    analysis. Genomics, 2(3), 231-239.
 }
 

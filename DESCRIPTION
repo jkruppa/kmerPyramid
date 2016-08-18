@@ -1,8 +1,8 @@
 Package: kmerPyramid
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors: Jochen Kruppa [aut], Klaus Jung [aut, cre]
-Description: What the package does (one paragraph).
+Title: Plot the kmer distribution of a species in the 3D space of a principle componet analysis
+Version: 0.1
+Authors: Jochen Kruppa [aut, cre], Klaus Jung [aut]
+Description: The package allows to plot the kmer distribution of a species in the 3D space of a principle componet analysis.
 Depends:
     R (>= 3.2.3)
 Imports:

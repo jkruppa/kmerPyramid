@@ -12,13 +12,13 @@ getKmerDistribution(seq, kmers = c(1, 2, 3, 4, 5))
 \item{kmers}{vector of wanted k-mers}
 }
 \value{
-data.frame
+data.frame with probability of the k-mers
 }
 \description{
-Text
+Calculates the k-mer distribution of a given sequence
 }
 \details{
-Text
+Calculates the k-mer distribution of a given sequence
 }
 \author{
 Jochen Kruppa
