@@ -1,4 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
-data/virusEmblKmerDist.txt
+data/kmerBacteriaDistr.txt
+data/kmerVirusDistr.txt
+R/finished-functions.R
+R/jung_abb1.r
+R/jung_abb2.r
