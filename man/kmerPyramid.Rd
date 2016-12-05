@@ -4,19 +4,19 @@
 \alias{kmerPyramid}
 \title{This is a test function}
 \usage{
-kmerPyramid(sampleKmerDistribution, virusKmerDistribution = NULL,
-  edges = FALSE, colorVirus = "yellow", colorSample = NULL)
+kmerPyramid(kmerDistributionList, colorList, ids = NULL, show.edges = FALSE,
+  method = "scatter")
 }
 \arguments{
-\item{sampleKmerDistribution}{}
+\item{kmerDistributionList}{}
 
-\item{virusKmerDistribution}{}
+\item{colorList}{}
 
-\item{edges}{}
+\item{ids}{}
 
-\item{colorVirus}{}
+\item{show.edges}{}
 
-\item{colorSample}{}
+\item{method}{}
 }
 \description{
 This is a test function

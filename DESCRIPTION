@@ -8,7 +8,8 @@ Depends:
 Imports:
     ShortRead (>= 1.28.0),
     Biostrings (>= 2.38.4),
-    plyr (>= 1.8.4)
+    plyr (>= 1.8.4),
+    hashmap (>= 0.1.0)
 License: $license
 Encoding: UTF-8
 LazyData: true

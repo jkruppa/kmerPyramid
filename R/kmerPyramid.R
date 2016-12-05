@@ -2,17 +2,22 @@
 ##'
 ##' This is a test function
 ##' @title This is a test function
-##' @param sampleKmerDistribution 
-##' @param virusKmerDistribution 
-##' @param edges 
-##' @param colorVirus 
-##' @param colorSample 
+##' @param kmerDistributionList 
+##' @param colorList 
+##' @param ids 
+##' @param show.edges 
+##' @param method 
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
-kmerPyramid <- function(kmerDistributionList, colorList, ids = NULL, show.edges = FALSE){
+kmerPyramid <- function(kmerDistributionList,
+                        colorList,
+                        ids = NULL,
+                        show.edges = FALSE,
+                        method = "scatter"){
     require(plyr); require(dplyr)
     require(scatterplot3d)
+    require(rgl)
     ## only select the ACTG information
     kmerPcaList <- llply(kmerDistributionList, function(x) {
         return(select(tbl_df(x), A, C, G, T))
@@ -63,23 +68,52 @@ kmerPyramid <- function(kmerDistributionList, colorList, ids = NULL, show.edges 
             return(p)
         })
     }
-    ## png("speciesAGTCDist1.png", width = 20, height = 20, res = 300, unit = "cm")
-    if("species" %in% names(kmerDistributionList)){
-        p <- suppressWarnings(scatterplot3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
-                                            color = colorList[["species"]],
-                                            cex.symbols = 1, cex.lab = 1, cex.axis = 1,
-                                            mar = c(3, 3, 0, 2), pch = 1, box = FALSE,
-                                            xlab = "PC1", ylab = "PC2", zlab = "PC3",
-                                            xlim = c(-lm, lm), ylim = c(-lm, lm), zlim = c(-lm, lm)))
-    } else {
-        p <- suppressWarnings(scatterplot3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
-                                            color = colorList[["sample"]],
-                                            cex.symbols = 1, cex.lab = 1, cex.axis = 1,
-                                            mar = c(3, 3, 0, 2), pch = 1, box = FALSE,
-                                            xlab = "PC1", ylab = "PC2", zlab = "PC3",
-                                            xlim = c(-lm, lm), ylim = c(-lm, lm), zlim = c(-lm, lm)))      
-    }
-    if(show.edges){
+    switch(method,
+           "scatter" = {
+               if("species" %in% names(kmerDistributionList)){
+                   p <- suppressWarnings(scatterplot3d(select(filter(plotDf, id == "species"),
+                                                              PC1, PC2, PC3),
+                                                       color = colorList[["species"]],
+                                                       cex.symbols = 1,
+                                                       cex.lab = 1,
+                                                       cex.axis = 1,
+                                                       mar = c(3, 3, 0, 2),
+                                                       pch = 1,
+                                                       box = FALSE,
+                                                       xlab = "PC1", ylab = "PC2", zlab = "PC3",
+                                                       xlim = c(-lm, lm),
+                                                       ylim = c(-lm, lm),
+                                                       zlim = c(-lm, lm)))
+               } else {
+                   p <- suppressWarnings(scatterplot3d(select(filter(plotDf, id == "sample"),
+                                                              PC1, PC2, PC3),
+                                                       color = colorList[["sample"]],
+                                                       cex.symbols = 1,
+                                                       cex.lab = 1,
+                                                       cex.axis = 1,
+                                                       mar = c(3, 3, 0, 2),
+                                                       pch = 1,
+                                                       box = FALSE,
+                                                       xlab = "PC1", ylab = "PC2", zlab = "PC3",
+                                                       xlim = c(-lm, lm),
+                                                       ylim = c(-lm, lm),
+                                                       zlim = c(-lm, lm)))      
+               }
+           },
+           "3d" = {
+               if("species" %in% names(kmerDistributionList)){
+                   plot3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
+                          col = colorList[["species"]])
+                   identify3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
+                              label = ids)
+               } else {
+                   plot3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                          col = colorList[["species"]])
+                   identify3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                              label = ids)                   
+               }
+           })
+    if(show.edges & method != "3d"){
         segments(e1$x, e1$y, e2$x, e2$y, lwd = 2, col = 1, lty = 3)
         segments(e1$x, e1$y, e3$x, e3$y, lwd = 2, col = 1, lty = 3)
         segments(e1$x, e1$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
@@ -91,23 +125,28 @@ kmerPyramid <- function(kmerDistributionList, colorList, ids = NULL, show.edges 
         text(e3$x, e3$y, label = "C", pos = 4, cex = 2)
         text(e4$x, e4$y, label = "G", pos = 3, cex = 2)
     }
-    if("sample" %in% names(kmerDistributionList)){
+    if("sample" %in% names(kmerDistributionList) & method != "3d"){
         l_ply(seq_along(samplePosList), function(i) {
             text(samplePosList[[i]]$x, samplePosList[[i]]$y,
                  label = "X", pos = 1, cex = 2, col = colorList[["sample"]][i])
         })
-        legend("topleft", inset = 0.15, 
-               col = colorList[["sample"]], bg="white", lty=c(1,1), lwd=2, yjust=0,
+        legend("topleft", ##inset = 1,
+               ##horiz = TRUE, xpd = TRUE,
+               col = colorList[["sample"]], bg="white", lty=c(1,1), lwd=2, yjust=0.5,
                legend = ids, cex = 1.1)
         ## dev.off()
     } else {
-        if(!is.null(ids)){
-            legend("topleft", inset = 0.15,
-                   col = unique(colorList[["species"]]), bg="white", lty=c(1,1), lwd=2, yjust=0,
+        if(!is.null(ids) & method != "3d"){
+            legend("topleft", ##inset = 1,
+                   ##horiz = TRUE, xpd = TRUE,
+                   col = unique(colorList[["species"]]), bg="white", lty=c(1,1), lwd=2, yjust=0.5,
                    legend = unique(ids), cex = 1.1)
         }
     }
 }
+
+
+
 
 
 ##' Small helper function to make a invisible scatterplot3d
@@ -126,57 +165,3 @@ scatterplot3d.invisible <- function(...){
     res
 }
 
-## ------------------------------------------------------------
-## by J.Kruppa on Thursday, October  6, 2016 (15:27)
-## delete this for later...
-library(stringr)
-library(hashmap)
-load("../data/virusKmerDistribution.rda")
-load("../data/bacteriaKmerDistribution.rda")
-cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
-                "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
-## virus 
-virusKmerDistribution$type <- str_replace(virusKmerDistribution$type, " viruses", "")
-virusCleanKmerDistribution <- filter(virusKmerDistribution,
-                                     type %in% c("ssRNA", "dsRNA", "ssDNA", "dsDNA, no RNA stage"))
-colorVirusHash <- hashmap(as.character(unique(virusCleanKmerDistribution$type)), cbbPalette)
-
-
-kmerPyramid(kmerDistributionList = list(species = virusCleanKmerDistribution),
-            colorList = list(species = colorVirusHash[[virusCleanKmerDistribution$type]]),
-            ids = virusCleanKmerDistribution$type, show.edges = TRUE)
-
-## virus 
-bacteriaKmerDistribution$type <- str_replace(bacteriaKmerDistribution$type, " bacteriaes", "")
-bacteriaCleanKmerDistribution <- filter(bacteriaKmerDistribution,
-                                        type %in% c("ssRNA", "dsRNA", "ssDNA", "dsDNA, no RNA stage"))
-selectedBacteria <- which(table(bacteriaKmerDistribution$type) >= 100)
-bacteriaCleanKmerDistribution <- filter(bacteriaKmerDistribution,
-                                        type %in% names(selectedBacteria))
-colorBacteriaHash <- hashmap(as.character(unique(bacteriaCleanKmerDistribution$type)), cbbPalette)
-
-kmerPyramid(kmerDistributionList = list(species = bacteriaCleanKmerDistribution),
-            colorList = list(species = colorBacteriaHash[[bacteriaCleanKmerDistribution$type]]),
-            ids = bacteriaCleanKmerDistribution$type, show.edges = TRUE)
-
-
-png("virus-bac.png", width=15*3, height=15, res = 300, unit = "cm")
-par(mfrow=c(1, 3))
-## virus
-kmerPyramid(kmerDistributionList = list(species = virusCleanKmerDistribution),
-            colorList = list(species = colorVirusHash[[virusCleanKmerDistribution$type]]),
-            ids = virusCleanKmerDistribution$type, show.edges = TRUE)
-## bacteria
-kmerPyramid(kmerDistributionList = list(species = bacteriaCleanKmerDistribution),
-            colorList = list(species = colorBacteriaHash[[bacteriaCleanKmerDistribution$type]]),
-            ids = bacteriaCleanKmerDistribution$type, show.edges = TRUE)
-## bacteria with virus sample
-sampleKmerDistribution <- virusKmerDistribution[c(1, 2, 3),] 
-##
-kmerPyramid(kmerDistributionList = list(sample = sampleKmerDistribution, 
-                                        species = bacteriaKmerDistribution),
-            colorList = list(species = "black",
-                             sample = cbbPalette[2:4]),
-            ids = str_c("Virus-", LETTERS[1:3]), show.edges = FALSE)
-dev.off()
