@@ -2,11 +2,11 @@
 ##'
 ##' This is a test function
 ##' @title This is a test function
-##' @param kmerDistributionList 
-##' @param colorList 
-##' @param ids 
-##' @param show.edges 
-##' @param method 
+##' @param kmerDistributionList list of kmer distribution
+##' @param colorList list of color values
+##' @param ids names of samples or species
+##' @param show.edges should the deges in the scatter plot shown? (default = FALSE) 
+##' @param method should a scatterplot (scatter) or 3d plot (3d) be plotted (default = scatter)
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -144,10 +144,6 @@ kmerPyramid <- function(kmerDistributionList,
         }
     }
 }
-
-
-
-
 
 ##' Small helper function to make a invisible scatterplot3d
 ##'
