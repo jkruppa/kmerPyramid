@@ -1,6 +1,6 @@
-# kmerPyramid
+# acgtPyramid
 
-R package to visualize the kmer distribution between samples
+R package to visualize the acgt distribution between samples
 
 <p align="center">
   <img src="img/kmerPlot.png" width="400">
@@ -15,12 +15,12 @@ Get the released version from CRAN:
 
 ```R
 ## not available yet
-## install.packages("kmerPyramid")
+## install.packages("acgtPyramid")
 ```
 
 Or the development version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jkruppa/kmerPyramid")
+devtools::install_github("jkruppa/acgtPyramid")
 ```
