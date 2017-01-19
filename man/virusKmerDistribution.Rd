@@ -4,9 +4,11 @@
 \name{virusKmerDistribution}
 \alias{virusKmerDistribution}
 \title{k-mer distribution of virus DNA sequences}
-\format{A data frame with 5785 rows and 1365 variables:
+\format{A data frame with 5000+ rows and 1367 variables:
 \describe{
-  \item{id}{Name of the virus}
+  \item{id}{Name of the virus (NCBI)}
+  \item{type}{Type of the virus}
+  \item{species}{Species of the virus}
   \item{A}{Percentage of nucleic acid base A in the 1-mers}
   \item{...}{...}
   \item{TTTTT}{Percentage of nucleic acid mer TTTTT in the 5-mers}

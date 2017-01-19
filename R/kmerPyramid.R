@@ -2,7 +2,7 @@
 ##'
 ##' This is a test function
 ##' @title This is a test function
-##' @param kmerDistributionList list of kmer distribution
+##' @param acgtDistributionList distribution of the acgt
 ##' @param colorList list of color values
 ##' @param ids names of samples or species
 ##' @param show.edges should the deges in the scatter plot shown? (default = FALSE) 
@@ -10,14 +10,18 @@
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
-kmerPyramid <- function(kmerDistributionList,
+acgtPyramid <- function(acgtDistributionList,
                         colorList,
                         ids = NULL,
                         show.edges = FALSE,
+                        text = NULL,
+                        text.cex = 1,
+                        show.identify = FALSE,
                         method = "scatter"){
     require(plyr); require(dplyr)
     require(scatterplot3d)
     require(rgl)
+    kmerDistributionList <- acgtDistributionList ## rename befor finishing
     ## only select the ACTG information
     kmerPcaList <- llply(kmerDistributionList, function(x) {
         return(select(tbl_df(x), A, C, G, T))
@@ -101,47 +105,76 @@ kmerPyramid <- function(kmerDistributionList,
                }
            },
            "3d" = {
-               if("species" %in% names(kmerDistributionList)){
-                   plot3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
-                          col = colorList[["species"]])
-                   identify3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
-                              label = ids)
+             rgl.open()
+             bg3d(color = "white")
+             par3d(family = "sans", cex = 2)
+             if("species" %in% names(kmerDistributionList)){
+               if(!is.null(text)) {
+                 texts3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
+                         texts = text, cex = text.cex)
                } else {
-                   plot3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                 points3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
                           col = colorList[["species"]])
-                   identify3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
-                              label = ids)                   
                }
+               if(show.identify){
+                 identify3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
+                            label = ids)
+               }
+             } else {
+               if(!is.null(text)) {
+                 texts3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                         texts = text)
+               } else {
+                 points3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                          col = colorList[["sample"]])
+               }
+               if(show.identify) {
+                 identify3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
+                            label = ids, cex = identify.cex)
+               }
+             }
            })
     if(show.edges & method != "3d"){
-        segments(e1$x, e1$y, e2$x, e2$y, lwd = 2, col = 1, lty = 3)
-        segments(e1$x, e1$y, e3$x, e3$y, lwd = 2, col = 1, lty = 3)
-        segments(e1$x, e1$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
-        segments(e2$x, e2$y, e3$x, e3$y, lwd = 2, col = 1, lty = 3)
-        segments(e2$x, e2$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
-        segments(e3$x, e3$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
-        text(e1$x, e1$y, label = "A", pos = 1, cex = 2)
-        text(e2$x, e2$y, label = "T", pos = 4, cex = 2)
-        text(e3$x, e3$y, label = "C", pos = 4, cex = 2)
-        text(e4$x, e4$y, label = "G", pos = 3, cex = 2)
+      segments(e1$x, e1$y, e2$x, e2$y, lwd = 2, col = 1, lty = 3)
+      segments(e1$x, e1$y, e3$x, e3$y, lwd = 2, col = 1, lty = 3)
+      segments(e1$x, e1$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
+      segments(e2$x, e2$y, e3$x, e3$y, lwd = 2, col = 1, lty = 3)
+      segments(e2$x, e2$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
+      segments(e3$x, e3$y, e4$x, e4$y, lwd = 2, col = 1, lty = 3)
+      text(e1$x, e1$y, label = "A", pos = 1, cex = 2)
+      text(e2$x, e2$y, label = "T", pos = 4, cex = 2)
+      text(e3$x, e3$y, label = "C", pos = 4, cex = 2)
+      text(e4$x, e4$y, label = "G", pos = 3, cex = 2)
+    }
+    if(show.edges & method == "3d"){
+      lines3d(edgeDf[c(1,2), c("PC1", "PC2", "PC3")], col = 1)
+      lines3d(edgeDf[c(1,3), c("PC1", "PC2", "PC3")], col = 1)
+      lines3d(edgeDf[c(1,4), c("PC1", "PC2", "PC3")], col = 1)
+      lines3d(edgeDf[c(2,3), c("PC1", "PC2", "PC3")], col = 1)
+      lines3d(edgeDf[c(2,4), c("PC1", "PC2", "PC3")], col = 1)
+      lines3d(edgeDf[c(3,4), c("PC1", "PC2", "PC3")], col = 1)
+      text3d(edgeDf[1, "PC1"], edgeDf[1, "PC2"], edgeDf[1, "PC3"], "A", color="black")
+      text3d(edgeDf[2, "PC1"], edgeDf[2, "PC2"], edgeDf[2, "PC3"], "C", color="black")
+      text3d(edgeDf[3, "PC1"], edgeDf[3, "PC2"], edgeDf[3, "PC3"], "G", color="black")
+      text3d(edgeDf[4, "PC1"], edgeDf[4, "PC2"], edgeDf[4, "PC3"], "T", color="black")
     }
     if("sample" %in% names(kmerDistributionList) & method != "3d"){
-        l_ply(seq_along(samplePosList), function(i) {
-            text(samplePosList[[i]]$x, samplePosList[[i]]$y,
-                 label = "X", pos = 1, cex = 2, col = colorList[["sample"]][i])
-        })
+      l_ply(seq_along(samplePosList), function(i) {
+        text(samplePosList[[i]]$x, samplePosList[[i]]$y,
+             label = "X", pos = 1, cex = 2, col = colorList[["sample"]][i])
+      })
+      legend("topleft", ##inset = 1,
+             ##horiz = TRUE, xpd = TRUE,
+             col = colorList[["sample"]], bg="white", lty=c(1,1), lwd=2, yjust=0.5,
+             legend = ids, cex = 1.1)
+      ## dev.off()
+    } else {
+      if(!is.null(ids) & method != "3d"){
         legend("topleft", ##inset = 1,
                ##horiz = TRUE, xpd = TRUE,
-               col = colorList[["sample"]], bg="white", lty=c(1,1), lwd=2, yjust=0.5,
-               legend = ids, cex = 1.1)
-        ## dev.off()
-    } else {
-        if(!is.null(ids) & method != "3d"){
-            legend("topleft", ##inset = 1,
-                   ##horiz = TRUE, xpd = TRUE,
-                   col = unique(colorList[["species"]]), bg="white", lty=c(1,1), lwd=2, yjust=0.5,
-                   legend = unique(ids), cex = 1.1)
-        }
+               col = unique(colorList[["species"]]), bg="white", lty=c(1,1), lwd=2, yjust=0.5,
+               legend = unique(ids), cex = 1.1)
+      }
     }
 }
 

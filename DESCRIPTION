@@ -1,6 +1,6 @@
-Package: kmerPyramid
-Title: Plot the kmer distribution of a species in the 3D space of a principle componet analysis
-Version: 0.1
+Package: acgtPyramid
+Title: Plot the ACGT distribution of a species in the 3D space of a principle componet analysis
+Version: 0.1.1
 Authors: Jochen Kruppa [aut, cre], Klaus Jung [aut]
 Description: The package allows to plot the kmer distribution of a species in the 3D space of a principle componet analysis.
 Depends:
