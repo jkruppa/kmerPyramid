@@ -111,7 +111,7 @@ acgtPyramid <- function(acgtDistributionList,
              if("species" %in% names(kmerDistributionList)){
                if(!is.null(text)) {
                  texts3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
-                         texts = text, cex = text.cex)
+                         texts = text, cex = text.cex, col = "black")
                } else {
                  points3d(select(filter(plotDf, id == "species"), PC1, PC2, PC3),
                           col = colorList[["species"]])
@@ -123,14 +123,14 @@ acgtPyramid <- function(acgtDistributionList,
              } else {
                if(!is.null(text)) {
                  texts3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
-                         texts = text)
+                         texts = text, cex = text.cex, col = "black")
                } else {
                  points3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
                           col = colorList[["sample"]])
                }
                if(show.identify) {
                  identify3d(select(filter(plotDf, id == "sample"), PC1, PC2, PC3),
-                            label = ids, cex = identify.cex)
+                            label = ids)
                }
              }
            })
