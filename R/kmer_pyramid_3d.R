@@ -1,7 +1,7 @@
-##' .. content for \description{} (no empty lines) ..
+##' The acgt pyramid 3D plotting function
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' The acgt pyramid 3D plotting function
+##' @title acgt pyramid 3D plotting function
 ##' @param df 
 ##' @param color 
 ##' @param ids 
@@ -85,10 +85,10 @@ pyramid_3d <- function(df,
   }
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' Wrapper for getting the positions of the edges
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' Wrapper for getting the positions of the edges
+##' @title Wrapper for getting the positions of the edges
 ##' @param pca_edge_df 
 ##' @return 
 ##' @author Jochen Kruppa
@@ -105,10 +105,10 @@ pyramid_3d_draw_edges <- function(pca_edge_df){
   text3d(pca_edge_df[4, "PC1"], pca_edge_df[4, "PC2"], pca_edge_df[4, "PC3"], "T", color="black")
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' Calculate the PCA with pyramid edges
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' Calculate the PCA with pyramid edges
+##' @title Calculate the PCA with pyramid edges
 ##' @param df 
 ##' @return 
 ##' @author Jochen Kruppa
@@ -120,14 +120,19 @@ get_pca_plot_list <- function(df){
               pca_edge_df = tbl_df(pca[c(1:4),])))
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' Get the PCA values for sliding window
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' Get the PCA values for sliding window
+##' @title Get the PCA values for sliding window
 ##' @param seqs 
 ##' @param window 
 ##' @return 
 ##' @author Jochen Kruppa
+##' @export
+##' @examples
+##' load("../data/viralExampleSeqs.rda")
+##' 
+##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 get_pca_window_list <- function(seqs, window) {
   require(plyr); library(dplyr)
   require(stringr)
@@ -154,10 +159,10 @@ get_pca_window_list <- function(seqs, window) {
   return(pca_list)
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' Wrapper for the sliding window k-mer distribution
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' Wrapper for the sliding window k-mer distribution
+##' @title Wrapper for the sliding window k-mer distribution
 ##' @param seq 
 ##' @param window 
 ##' @param prob_flag 
@@ -170,18 +175,10 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 }
 
 
-
-list <- get_pca_window_list(viral_seqs[1:2], window = 2)
-##
-
-pyramid_3d_window(list[1], difference = FALSE, identify = TRUE)
-
-
-
-##' .. content for \description{} (no empty lines) ..
+##' The k-mer window pyramid 3D plotting function
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' The k-mer window pyramid 3D plotting function
+##' @title The k-mer window pyramid 3D plotting function
 ##' @param list 
 ##' @param color 
 ##' @param difference 
@@ -269,10 +266,10 @@ pyramid_3d_window <- function(list,
   }
 }
 
-##' .. content for \description{} (no empty lines) ..
+##' Get the difference in counts between to sequences
 ##'
-##' .. content for \details{} ..
-##' @title 
+##' Get the difference in counts between to sequences
+##' @title Get the difference in counts between to sequences
 ##' @param list 
 ##' @return 
 ##' @author Jochen Kruppa
