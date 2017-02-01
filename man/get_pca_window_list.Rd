@@ -18,7 +18,7 @@ Get the PCA values for sliding window
 Get the PCA values for sliding window
 }
 \examples{
-load("../data/viralExampleSeqs.rda")
+data(viralExampleSeqs)
 
 viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 }

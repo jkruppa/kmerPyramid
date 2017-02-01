@@ -27,7 +27,7 @@ The acgt pyramid 3D plotting function
 The acgt pyramid 3D plotting function
 }
 \examples{
-load("../data/viralExampleSeqs.rda")
+data(viralExampleSeqs)
 
 kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
 
@@ -43,7 +43,7 @@ pyramid_3d(kmer_distr,
            color = "blue",
            identify = TRUE)
 
-load("../data/viralExampleCodingSeq.rda")
+data(viralExampleCodingSeq)
 
 kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
 text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")

@@ -23,7 +23,7 @@ The k-mer window pyramid 3D plotting function
 The k-mer window pyramid 3D plotting function
 }
 \examples{
-load("../data/viralExampleSeqs.rda")
+data(viralExampleSeqs)
 
 viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 

@@ -12,7 +12,7 @@
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
-##' load("../data/viralExampleSeqs.rda")
+##' data(viralExampleSeqs)
 ##' 
 ##' kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
 ##' 
@@ -28,7 +28,7 @@
 ##'            color = "blue",
 ##'            identify = TRUE)
 ##' 
-##' load("../data/viralExampleCodingSeq.rda")
+##' data(viralExampleCodingSeq)
 ##' 
 ##' kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
 ##' text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")
@@ -130,7 +130,7 @@ get_pca_plot_list <- function(df){
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
-##' load("../data/viralExampleSeqs.rda")
+##' data(viralExampleSeqs)
 ##' 
 ##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 get_pca_window_list <- function(seqs, window) {
@@ -187,7 +187,7 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
-##' load("../data/viralExampleSeqs.rda")
+##' data(viralExampleSeqs)
 ##' 
 ##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 ##' 
