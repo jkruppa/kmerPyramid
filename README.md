@@ -66,6 +66,10 @@ pyramid_3d(kmer_distr,
            identify = TRUE)
 ```
 
+<p align="center">
+  <img src="img/pyramid_3d_example0.PNG" width="400">
+</p>
+
 ### k-mer pyrmaid 3D with sliding window
 
 ```R
