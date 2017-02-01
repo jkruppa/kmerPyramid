@@ -26,10 +26,12 @@ devtools::install_github("jkruppa/acgtPyramid")
 
 ## Examples
 
-### acgt pyrmaid 3D
+### acgt pyramid 3D
 
 ```R
-load("../data/viralExampleSeqs.rda")
+library(kmerPyramid)
+
+data(viralExampleSeqs)
  
 kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
  
@@ -45,7 +47,7 @@ pyramid_3d(kmer_distr,
            color = "blue",
            identify = TRUE)
  
-load("../data/viralExampleCodingSeq.rda")
+data(viralExampleCodingSeq)
  
 kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
 text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")
@@ -70,10 +72,12 @@ pyramid_3d(kmer_distr,
   <img src="img/pyramid_3d_example0.PNG" width="300">
 </p>
 
-### k-mer pyrmaid 3D with sliding window
+### k-mer pyramid 3D with sliding window
 
 ```R
-load("../data/viralExampleSeqs.rda")
+library(kmerPyramid)
+
+data(viralExampleSeqs)
 
 viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 
