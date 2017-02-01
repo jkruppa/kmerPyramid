@@ -8,7 +8,6 @@ R package to visualize the acgt distribution between samples
 </p>
 
 
-
 ## Installation
 
 Get the released version from CRAN:
@@ -23,4 +22,44 @@ Or the development version from github:
 ```R
 # install.packages("devtools")
 devtools::install_github("jkruppa/acgtPyramid")
+```
+
+## Examples
+
+```R
+load("../data/viralExampleSeqs.rda")
+ 
+kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
+ 
+pyramid_3d(kmer_distr,
+           cex = 2,
+           color = "blue")
+ 
+ids <- names(viralExampleSeqs)
+ 
+pyramid_3d(kmer_distr,
+           ids = ids,
+           cex = 2,
+           color = "blue",
+           identify = TRUE)
+ 
+load("../data/viralExampleCodingSeq.rda")
+ 
+kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
+text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")
+color_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "black", "red")
+ 
+pyramid_3d(kmer_distr,
+           cex = 1,
+           text = text_ids,
+           color = color_ids)
+ 
+ids <- names(viralExampleCodingSeq)
+
+pyramid_3d(kmer_distr,
+           ids = ids,
+           cex = 1,
+           text = text_ids,
+           color = color_ids,
+           identify = TRUE)
 ```
