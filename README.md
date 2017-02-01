@@ -77,11 +77,9 @@ pyramid_3d_window(viral_window_list[1],
                   identify = TRUE)
 
 pyramid_3d_window(viral_window_list[c(3,5)],
-                  color = "red",
                   difference = TRUE)
 
 pyramid_3d_window(viral_window_list[c(3,5)],
-                  color = "red",
                   difference = TRUE,
                   identify = TRUE)
 ```
