@@ -8,7 +8,6 @@
 ##' @author Jochen Kruppa
 ##' @export
 getKmerDistribution <- function(seq, kmers = c(1,2,3,4,5)){
-  require(Biostrings)
   require(plyr)
   kmerDistList <- llply(kmers, function(kmer){
     countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))

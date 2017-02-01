@@ -20,7 +20,7 @@
 virusKmerDistribution
 }
 \description{
-A dataset containing containing the 1, 2, 3, 4, and 5-mer
+A dataset containing the 1, 2, 3, 4, and 5-mer
 distribution of the nucleic acid bases of 5785 viruses available as
 embl files from NCBI.
 }

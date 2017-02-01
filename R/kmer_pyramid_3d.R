@@ -8,7 +8,7 @@
 ##' @param text 
 ##' @param cex 
 ##' @param show.identify 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
@@ -90,7 +90,7 @@ pyramid_3d <- function(df,
 ##' Wrapper for getting the positions of the edges
 ##' @title Wrapper for getting the positions of the edges
 ##' @param pca_edge_df 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 pyramid_3d_draw_edges <- function(pca_edge_df){
   lines3d(pca_edge_df[c(1,2), c("PC1", "PC2", "PC3")], col = 1)
@@ -110,7 +110,7 @@ pyramid_3d_draw_edges <- function(pca_edge_df){
 ##' Calculate the PCA with pyramid edges
 ##' @title Calculate the PCA with pyramid edges
 ##' @param df 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 get_pca_plot_list <- function(df){
   edges_mat <- setNames(data.frame(rbind(diag(1,4))), c("A", "C", "G", "T"))
@@ -126,7 +126,7 @@ get_pca_plot_list <- function(df){
 ##' @title Get the PCA values for sliding window
 ##' @param seqs 
 ##' @param window 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
@@ -166,7 +166,7 @@ get_pca_window_list <- function(seqs, window) {
 ##' @param seq 
 ##' @param window 
 ##' @param prob_flag 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 get_window_distr <- function(seq, window, prob_flag = TRUE) {
   agct_win_distr <- letterFrequencyInSlidingView(unlist(seq), view.width = window,
@@ -183,7 +183,7 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##' @param color 
 ##' @param difference 
 ##' @param identify 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
@@ -271,7 +271,7 @@ pyramid_3d_window <- function(list,
 ##' Get the difference in counts between to sequences
 ##' @title Get the difference in counts between to sequences
 ##' @param list 
-##' @return 
+##' @return NULL
 ##' @author Jochen Kruppa
 get_diff_values <- function(list){
   vir_1 <- list[[1]]$pca_plot_sphere_df
