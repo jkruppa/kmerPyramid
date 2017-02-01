@@ -190,26 +190,23 @@ pyramid_3d_window(list[1], difference = FALSE, identify = TRUE)
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
-
-load("../data/viralExampleSeqs.rda")
-
-viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
-
-pyramid_3d_window(viral_window_list[1],
-                  color = "red")
-
-pyramid_3d_window(viral_window_list[1],
-                  color = "red",
-                  identify = TRUE)
-
-pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE)
-
-pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE,
-                  identify = TRUE)
-
-
+##' load("../data/viralExampleSeqs.rda")
+##' 
+##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
+##' 
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red")
+##' 
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red",
+##'                   identify = TRUE)
+##' 
+##' pyramid_3d_window(viral_window_list[c(3,5)],
+##'                   difference = TRUE)
+##' 
+##' pyramid_3d_window(viral_window_list[c(3,5)],
+##'                   difference = TRUE,
+##'                   identify = TRUE)
 pyramid_3d_window <- function(list,
                               color = "black",
                               difference = FALSE,
