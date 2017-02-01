@@ -67,7 +67,7 @@ pyramid_3d(kmer_distr,
 ```
 
 <p align="center">
-  <img src="img/pyramid_3d_example0.PNG" width="400">
+  <img src="img/pyramid_3d_example0.PNG" width="300">
 </p>
 
 ### k-mer pyrmaid 3D with sliding window
@@ -81,7 +81,7 @@ pyramid_3d_window(viral_window_list[1],
                   color = "red")
 ```
 <p align="center">
-  <img src="img/pyramid_3d_example1.PNG" width="400">
+  <img src="img/pyramid_3d_example1.PNG" width="300">
 </p>
 
 ```R
@@ -90,7 +90,7 @@ pyramid_3d_window(viral_window_list[1],
                   identify = TRUE)
 ```
 <p align="center">
-  <img src="img/pyramid_3d_example2.PNG" width="400">
+  <img src="img/pyramid_3d_example2.PNG" width="300">
 </p>
 
 ```R
@@ -98,7 +98,7 @@ pyramid_3d_window(viral_window_list[c(3,5)],
                   difference = TRUE)
 ```
 <p align="center">
-  <img src="img/pyramid_3d_example3.PNG" width="400">
+  <img src="img/pyramid_3d_example3.PNG" width="300">
 </p>
 
 ```R
@@ -107,5 +107,5 @@ pyramid_3d_window(viral_window_list[c(3,5)],
                   identify = TRUE)
 ```
 <p align="center">
-  <img src="img/pyramid_3d_example4.PNG" width="400">
+  <img src="img/pyramid_3d_example4.PNG" width="300">
 </p>
