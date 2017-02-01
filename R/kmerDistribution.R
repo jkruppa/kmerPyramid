@@ -8,14 +8,15 @@
 ##' @author Jochen Kruppa
 ##' @export
 getKmerDistribution <- function(seq, kmers = c(1,2,3,4,5)){
-    kmerDistList <- llply(kmers, function(kmer){
-        countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))
-        denom <- apply(countDf, 1, sum)
-        percentageDf <- countDf/ifelse(denom == 0, 1, denom)
-        return(percentageDf)
-    }, .parallel = TRUE)
-    kmerDistDf <- do.call(cbind, kmerDistList)
-    return(kmerDistDf)
+  require(plyr)
+  kmerDistList <- llply(kmers, function(kmer){
+    countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))
+    denom <- apply(countDf, 1, sum)
+    percentageDf <- countDf/ifelse(denom == 0, 1, denom)
+    return(percentageDf)
+  }, .parallel = FALSE)
+  kmerDistDf <- do.call(cbind, kmerDistList)
+  return(kmerDistDf)
 }
 
 ##' The function calculates the needed reads given a coverage and the

@@ -1,29 +1,28 @@
-
 df <- readRDS("C:\\Users\\157216\\myWork\\paper_acgtPyramid\\data\\kmerDistr.RDS")
 refSeq_viral_file <- file.path("G:\\tierzucht\\AG_bioinf\\databases\\refseq",
                                "refSeq.viral.biostring.RDS")
 viral_seqs <- readRDS(refSeq_viral_file)
 
-pyramid_3d_draw_edges <- function(pca_edge_df){
-  lines3d(pca_edge_df[c(1,2), c("PC1", "PC2", "PC3")], col = 1)
-  lines3d(pca_edge_df[c(1,3), c("PC1", "PC2", "PC3")], col = 1)
-  lines3d(pca_edge_df[c(1,4), c("PC1", "PC2", "PC3")], col = 1)
-  lines3d(pca_edge_df[c(2,3), c("PC1", "PC2", "PC3")], col = 1)
-  lines3d(pca_edge_df[c(2,4), c("PC1", "PC2", "PC3")], col = 1)
-  lines3d(pca_edge_df[c(3,4), c("PC1", "PC2", "PC3")], col = 1)
-  text3d(pca_edge_df[1, "PC1"], pca_edge_df[1, "PC2"], pca_edge_df[1, "PC3"], "A", color="black")
-  text3d(pca_edge_df[2, "PC1"], pca_edge_df[2, "PC2"], pca_edge_df[2, "PC3"], "C", color="black")
-  text3d(pca_edge_df[3, "PC1"], pca_edge_df[3, "PC2"], pca_edge_df[3, "PC3"], "G", color="black")
-  text3d(pca_edge_df[4, "PC1"], pca_edge_df[4, "PC2"], pca_edge_df[4, "PC3"], "T", color="black")
-}
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param df 
+##' @param color 
+##' @param ids 
+##' @param text 
+##' @param cex 
+##' @param show.identify 
+##' @return 
+##' @author Jochen Kruppa
+##' @export
+##' @examples
 
-get_pca_plot_list <- function(df){
-  edges_mat <- setNames(data.frame(rbind(diag(1,4))), c("A", "C", "G", "T"))
-  pca_df <- rbind(edges_mat, df[c("A", "C", "G", "T")])
-  pca <- predict(prcomp(pca_df))[,1:3]
-  return(list(pca_plot_df = tbl_df(pca[-c(1:4),]),
-              pca_edge_df = tbl_df(pca[c(1:4),])))
-}
+load("../data/viralExampleSeqs.rda")
+viralExampleSeqs[1]
+
+getKmerDistribution(viralExampleSeqs[1], k = 1)
+
 
 pyramid_3d <- function(df,
                        color = "black",
@@ -60,6 +59,49 @@ pyramid_3d <- function(df,
   }
 }
 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param pca_edge_df 
+##' @return 
+##' @author Jochen Kruppa
+pyramid_3d_draw_edges <- function(pca_edge_df){
+  lines3d(pca_edge_df[c(1,2), c("PC1", "PC2", "PC3")], col = 1)
+  lines3d(pca_edge_df[c(1,3), c("PC1", "PC2", "PC3")], col = 1)
+  lines3d(pca_edge_df[c(1,4), c("PC1", "PC2", "PC3")], col = 1)
+  lines3d(pca_edge_df[c(2,3), c("PC1", "PC2", "PC3")], col = 1)
+  lines3d(pca_edge_df[c(2,4), c("PC1", "PC2", "PC3")], col = 1)
+  lines3d(pca_edge_df[c(3,4), c("PC1", "PC2", "PC3")], col = 1)
+  text3d(pca_edge_df[1, "PC1"], pca_edge_df[1, "PC2"], pca_edge_df[1, "PC3"], "A", color="black")
+  text3d(pca_edge_df[2, "PC1"], pca_edge_df[2, "PC2"], pca_edge_df[2, "PC3"], "C", color="black")
+  text3d(pca_edge_df[3, "PC1"], pca_edge_df[3, "PC2"], pca_edge_df[3, "PC3"], "G", color="black")
+  text3d(pca_edge_df[4, "PC1"], pca_edge_df[4, "PC2"], pca_edge_df[4, "PC3"], "T", color="black")
+}
+
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param df 
+##' @return 
+##' @author Jochen Kruppa
+get_pca_plot_list <- function(df){
+  edges_mat <- setNames(data.frame(rbind(diag(1,4))), c("A", "C", "G", "T"))
+  pca_df <- rbind(edges_mat, df[c("A", "C", "G", "T")])
+  pca <- predict(prcomp(pca_df))[,1:3]
+  return(list(pca_plot_df = tbl_df(pca[-c(1:4),]),
+              pca_edge_df = tbl_df(pca[c(1:4),])))
+}
+
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param seqs 
+##' @param window 
+##' @return 
+##' @author Jochen Kruppa
 get_pca_window_list <- function(seqs, window) {
   require(plyr); library(dplyr)
   require(stringr)
@@ -72,8 +114,6 @@ get_pca_window_list <- function(seqs, window) {
     window_kmer_count_df$ind <- laply(1:nrow(window_kmer_count_df), function(i) {
       str_c(rep(c("A", "C", "G", "T"), window_kmer_count_df[i,1:4]), collapse = "")
     })
-    ## window_kmer_count_df$ind <- apply(window_kmer_count_df, 1,
-    ##                              function(x) str_c(x, collapse = "_"))
     pca_sphere_df <- data.frame(pca_plot_list$pca_plot_df, window_kmer_count_df)
     ## ## get the radius for the difference sphere
     pca_sphere_df$count <- 1
@@ -88,11 +128,21 @@ get_pca_window_list <- function(seqs, window) {
   return(pca_list)
 }
 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param seq 
+##' @param window 
+##' @param prob_flag 
+##' @return 
+##' @author Jochen Kruppa
 get_window_distr <- function(seq, window, prob_flag = TRUE) {
   agct_win_distr <- letterFrequencyInSlidingView(unlist(seq), view.width = window,
                                                  letters = "ACGT", OR = 0, as.prob = prob_flag)
   return(tbl_df(agct_win_distr))
 }
+
 
 
 list <- get_pca_window_list(viral_seqs[1:2], window = 2)
@@ -102,8 +152,16 @@ pyramid_3d_window(list[1], difference = FALSE, identify = TRUE)
 
 
 
-
-
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param list 
+##' @param color 
+##' @param difference 
+##' @param identify 
+##' @return 
+##' @author Jochen Kruppa
 pyramid_3d_window <- function(list,
                               color = "black",
                               difference = FALSE,
@@ -166,6 +224,13 @@ pyramid_3d_window <- function(list,
   }
 }
 
+##' .. content for \description{} (no empty lines) ..
+##'
+##' .. content for \details{} ..
+##' @title 
+##' @param list 
+##' @return 
+##' @author Jochen Kruppa
 get_diff_values <- function(list){
   vir_1 <- list[[1]]$pca_plot_sphere_df
   vir_2 <- list[[2]]$pca_plot_sphere_df
