@@ -1,6 +1,6 @@
-# acgtPyramid
+# kmerPyramid
 
-R package to visualize the acgt distribution between samples
+R package to visualize the acgt or k-mer distribution between samples
 
 <p align="center">
   <img src="img/kmerPlot.png" width="400">
