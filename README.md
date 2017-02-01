@@ -63,3 +63,25 @@ pyramid_3d(kmer_distr,
            color = color_ids,
            identify = TRUE)
 ```
+
+```R
+load("../data/viralExampleSeqs.rda")
+
+viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
+
+pyramid_3d_window(viral_window_list[1],
+                  color = "red")
+
+pyramid_3d_window(viral_window_list[1],
+                  color = "red",
+                  identify = TRUE)
+
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  color = "red",
+                  difference = TRUE)
+
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  color = "red",
+                  difference = TRUE,
+                  identify = TRUE)
+```
