@@ -107,5 +107,5 @@ pyramid_3d_window(viral_window_list[c(3,5)],
                   identify = TRUE)
 ```
 <p align="center">
-  <img src="img/pyramid_3d_example4.PNG" width="300">
+  <img src="img/pyramid_3d_example4.PNG" width="400">
 </p>
