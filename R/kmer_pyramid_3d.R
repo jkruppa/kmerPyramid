@@ -1,8 +1,3 @@
-df <- readRDS("C:\\Users\\157216\\myWork\\paper_acgtPyramid\\data\\kmerDistr.RDS")
-refSeq_viral_file <- file.path("G:\\tierzucht\\AG_bioinf\\databases\\refseq",
-                               "refSeq.viral.biostring.RDS")
-viral_seqs <- readRDS(refSeq_viral_file)
-
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
@@ -17,19 +12,47 @@ viral_seqs <- readRDS(refSeq_viral_file)
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
-
-load("../data/viralExampleSeqs.rda")
-viralExampleSeqs[1]
-
-getKmerDistribution(viralExampleSeqs[1], k = 1)
-
-
+##' load("../data/viralExampleSeqs.rda")
+##' 
+##' kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
+##' 
+##' pyramid_3d(kmer_distr,
+##'            cex = 2,
+##'            color = "blue")
+##' 
+##' ids <- names(viralExampleSeqs)
+##' 
+##' pyramid_3d(kmer_distr,
+##'            ids = ids,
+##'            cex = 2,
+##'            color = "blue",
+##'            identify = TRUE)
+##' 
+##' load("../data/viralExampleCodingSeq.rda")
+##' 
+##' kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
+##' text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")
+##' color_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "black", "red")
+##' 
+##' pyramid_3d(kmer_distr,
+##'            cex = 1,
+##'            text = text_ids,
+##'            color = color_ids)
+##' 
+##' ids <- names(viralExampleCodingSeq)
+##' 
+##' pyramid_3d(kmer_distr,
+##'            ids = ids,
+##'            cex = 1,
+##'            text = text_ids,
+##'            color = color_ids,
+##'            identify = TRUE)
 pyramid_3d <- function(df,
                        color = "black",
                        ids = NULL,
                        text = NULL,
                        cex = 1,
-                       show.identify = FALSE)
+                       identify = FALSE)
 {
   require(plyr); require(dplyr)
   require(rgl)
@@ -53,7 +76,10 @@ pyramid_3d <- function(df,
              col = color,
              size = cex)
   }
-  if(show.identify){
+  if(identify){
+    bg3d(color = c("white", "black"))
+    material3d(color = "black")      
+    par3d(family = "sans", cex = 1)
     identify3d(pca_plot_list$pca_plot_df,
                label = ids)
   }
@@ -162,6 +188,28 @@ pyramid_3d_window(list[1], difference = FALSE, identify = TRUE)
 ##' @param identify 
 ##' @return 
 ##' @author Jochen Kruppa
+##' @export
+##' @examples
+
+load("../data/viralExampleSeqs.rda")
+
+viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
+
+pyramid_3d_window(viral_window_list[1],
+                  color = "red")
+
+pyramid_3d_window(viral_window_list[1],
+                  color = "red",
+                  identify = TRUE)
+
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  difference = TRUE)
+
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  difference = TRUE,
+                  identify = TRUE)
+
+
 pyramid_3d_window <- function(list,
                               color = "black",
                               difference = FALSE,
@@ -244,5 +292,3 @@ get_diff_values <- function(list){
                       ind = joined$ind)
   return(radius_df)
 }
-
-
