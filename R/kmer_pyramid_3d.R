@@ -1,13 +1,22 @@
 ##' The acgt pyramid 3D plotting function
 ##'
 ##' The acgt pyramid 3D plotting function
-##' @title acgt pyramid 3D plotting function
-##' @param df 
-##' @param color 
-##' @param ids 
-##' @param text 
-##' @param cex 
-##' @param show.identify 
+##' @title ACGT pyramid 3D plotting function
+##' @param df Data frame of k-mer freuencies. The single k-mers are
+##'   the columns and the rows indicating different samples, sequence
+##'   reads, or contigs.
+##' @param color Single value 'black', if all points should be black
+##'   or vector of length \emph{nrow(df)} if all points should be
+##'   colored differently.
+##' @param ids If \emph{identify = TRUE} the single points can be
+##'   selected and the given id is shown. Must have the length
+##'   \emph{nrow(df)}.
+##' @param text Single value 'x', if all points should be printed as
+##'   'x' or vector of length \emph{nrow(df)} if all points should be
+##'   printed by a different letter differently.
+##' @param cex Size of the text.
+##' @param identify Set to TRUE, if points should be identified by
+##'   their \emph{ids}.
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -85,11 +94,13 @@ pyramid_3d <- function(df,
   }
 }
 
-##' Wrapper for getting the positions of the edges
+##' Function to draw the edges of the 3D pyramid
 ##'
-##' Wrapper for getting the positions of the edges
-##' @title Wrapper for getting the positions of the edges
-##' @param pca_edge_df 
+##' Function to draw the edges of the 3D pyramid
+##' @title Function to draw the edges of the 3D pyramid
+##' @param pca_edge_df Data frame created by the
+##'   \code{\link{get_pca_plot_list}} function for drawing the edges
+##'   of the 3D pyramid.
 ##' @return NULL
 ##' @author Jochen Kruppa
 pyramid_3d_draw_edges <- function(pca_edge_df, alpha = 1){
@@ -113,8 +124,14 @@ pyramid_3d_draw_edges <- function(pca_edge_df, alpha = 1){
 ##'
 ##' Calculate the PCA with pyramid edges
 ##' @title Calculate the PCA with pyramid edges
-##' @param df 
-##' @return NULL
+##' @param df Data frame of k-mer freuencies. The single k-mers are
+##'   the columns and the rows indicating different samples, sequence
+##'   reads, or contigs.
+##' @return A list containing the following elements: 
+##' \describe{
+##' \item{\emph{pca_plot_df}}{Data frame of the first three principle components from the PCA representing the frequencies of the k-mers}
+##' \item{\emph{pca_edge_df}}{Data frame of the first three principle components from the PCA representing the edges of the 3D pyramid}
+##' }
 ##' @author Jochen Kruppa
 get_pca_plot_list <- function(df){
   edges_mat <- setNames(data.frame(rbind(diag(1,4))), c("A", "C", "G", "T"))
@@ -128,24 +145,35 @@ get_pca_plot_list <- function(df){
 ##'
 ##' Get the PCA values for sliding window
 ##' @title Get the PCA values for sliding window
-##' @param seqs 
-##' @param window 
-##' @return NULL
+##' @param seqs DNAStringSet of sequences
+##' @param window Size of the sliding window
+##' @return A list per sequence containing the following elements:
+##'   \describe{
+##' \item{\emph{pca_plot_list}}{Includes a list with the
+##'   first three principle components of the k-mer fequencies and the
+##'   first three principle components of the edges of the 3D
+##'   pyramid.}
+##' \item{\emph{pca_plot_sphere_df}}{Returns a data frame
+##'   with information on the frist three principle components and the
+##'   count number of single windows. Further the plotting radius for
+##'   the \code{\link{pyramid_3d_window}} function is returned.}
+##' }
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
 ##' data(viralExampleSeqs)
 ##' 
 ##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
-get_pca_window_list <- function(seqs, window) {
+get_pca_window_list <- function(seqs, window = 5) {
   require(plyr); library(dplyr)
   require(stringr)
-  pca_list <- llply(seqs, function(x, window = 5) {
+  require(Biostrings)
+  pca_list <- llply(seqs, function(x, win_size = window) {
     ## get the kmer sliding window distribution
-    window_kmer_prob_df <- get_window_distr(x, window = window, prob = TRUE)
+    window_kmer_prob_df <- get_window_distr(x, window = win_size, prob = TRUE)
     pca_plot_list <- get_pca_plot_list(window_kmer_prob_df)
     ## get the numer of count for each k-mer
-    window_kmer_count_df <- get_window_distr(x, window = window, prob = FALSE)
+    window_kmer_count_df <- get_window_distr(x, window = win_size, prob = FALSE)
     window_kmer_count_df$ind <- laply(1:nrow(window_kmer_count_df), function(i) {
       str_c(rep(c("A", "C", "G", "T"), window_kmer_count_df[i,1:4]), collapse = "")
     })
@@ -167,10 +195,10 @@ get_pca_window_list <- function(seqs, window) {
 ##'
 ##' Wrapper for the sliding window k-mer distribution
 ##' @title Wrapper for the sliding window k-mer distribution
-##' @param seq 
-##' @param window 
-##' @param prob_flag 
-##' @return NULL
+##' @param seq DNAStringSet object 
+##' @param window Size of the window
+##' @param prob_flag Should the frequencies of the k-mers returned or the counts
+##' @return Data frame of the k-mer distribution. 
 ##' @author Jochen Kruppa
 get_window_distr <- function(seq, window, prob_flag = TRUE) {
   agct_win_distr <- letterFrequencyInSlidingView(unlist(seq), view.width = window,
@@ -183,10 +211,22 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##'
 ##' The k-mer window pyramid 3D plotting function
 ##' @title The k-mer window pyramid 3D plotting function
-##' @param list 
-##' @param color 
-##' @param difference 
-##' @param identify 
+##' @param list List generated of sequences by the function
+##'   \code{link{get_pca_window_list}}. Only one list entry can be
+##'   plotted at the same time. If two list entries are provided, set
+##'   difference to TRUE to get the difference pyramid.
+##' @param color Single value 'black', if all points should be black
+##'   or vector of length \emph{nrow(df)} if all points should be
+##'   colored differently.
+##' @param difference Should the difference between two list entries
+##'   be calcualted and the difference pyramid be plotted? [default =
+##'   FALSE]
+##' @param identify Set to TRUE, if points should be identified, than
+##'   the k-mer will be shown.
+##' @param bw Black and white plot for the differences [default =
+##'   FALSE]
+##' @param bw.cex Size of the text symbols in the black and white
+##'   difference plot.
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export

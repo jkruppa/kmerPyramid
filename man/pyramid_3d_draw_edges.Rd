@@ -2,18 +2,20 @@
 % Please edit documentation in R/kmer_pyramid_3d.R
 \name{pyramid_3d_draw_edges}
 \alias{pyramid_3d_draw_edges}
-\title{Wrapper for getting the positions of the edges}
+\title{Function to draw the edges of the 3D pyramid}
 \usage{
 pyramid_3d_draw_edges(pca_edge_df, alpha = 1)
 }
 \arguments{
-\item{pca_edge_df}{}
+\item{pca_edge_df}{Data frame created by the
+\code{\link{get_pca_plot_list}} function for drawing the edges
+of the 3D pyramid.}
 }
 \description{
-Wrapper for getting the positions of the edges
+Function to draw the edges of the 3D pyramid
 }
 \details{
-Wrapper for getting the positions of the edges
+Function to draw the edges of the 3D pyramid
 }
 \author{
 Jochen Kruppa

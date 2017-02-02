@@ -7,7 +7,16 @@
 get_pca_plot_list(df)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame of k-mer freuencies. The single k-mers are
+the columns and the rows indicating different samples, sequence
+reads, or contigs.}
+}
+\value{
+A list containing the following elements: 
+\describe{
+\item{\emph{pca_plot_df}}{Data frame of the first three principle components from the PCA representing the frequencies of the k-mers}
+\item{\emph{pca_edge_df}}{Data frame of the first three principle components from the PCA representing the edges of the 3D pyramid}
+}
 }
 \description{
 Calculate the PCA with pyramid edges

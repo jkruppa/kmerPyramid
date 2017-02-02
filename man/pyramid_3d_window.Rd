@@ -8,13 +8,27 @@ pyramid_3d_window(list, color = "black", difference = FALSE,
   identify = FALSE, bw = FALSE, bw.cex = 10)
 }
 \arguments{
-\item{list}{}
+\item{list}{List generated of sequences by the function
+\code{link{get_pca_window_list}}. Only one list entry can be
+plotted at the same time. If two list entries are provided, set
+difference to TRUE to get the difference pyramid.}
 
-\item{color}{}
+\item{color}{Single value 'black', if all points should be black
+or vector of length \emph{nrow(df)} if all points should be
+colored differently.}
 
-\item{difference}{}
+\item{difference}{Should the difference between two list entries
+be calcualted and the difference pyramid be plotted? [default =
+FALSE]}
 
-\item{identify}{}
+\item{identify}{Set to TRUE, if points should be identified, than
+the k-mer will be shown.}
+
+\item{bw}{Black and white plot for the differences [default =
+FALSE]}
+
+\item{bw.cex}{Size of the text symbols in the black and white
+difference plot.}
 }
 \description{
 The k-mer window pyramid 3D plotting function

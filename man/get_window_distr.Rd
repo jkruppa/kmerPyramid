@@ -7,11 +7,14 @@
 get_window_distr(seq, window, prob_flag = TRUE)
 }
 \arguments{
-\item{seq}{}
+\item{seq}{DNAStringSet object}
 
-\item{window}{}
+\item{window}{Size of the window}
 
-\item{prob_flag}{}
+\item{prob_flag}{Should the frequencies of the k-mers returned or the counts}
+}
+\value{
+Data frame of the k-mer distribution.
 }
 \description{
 Wrapper for the sliding window k-mer distribution

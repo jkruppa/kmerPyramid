@@ -4,12 +4,25 @@
 \alias{get_pca_window_list}
 \title{Get the PCA values for sliding window}
 \usage{
-get_pca_window_list(seqs, window)
+get_pca_window_list(seqs, window = 5)
 }
 \arguments{
-\item{seqs}{}
+\item{seqs}{DNAStringSet of sequences}
 
-\item{window}{}
+\item{window}{Size of the sliding window}
+}
+\value{
+A list per sequence containing the following elements:
+  \describe{
+\item{\emph{pca_plot_list}}{Includes a list with the
+  first three principle components of the k-mer fequencies and the
+  first three principle components of the edges of the 3D
+  pyramid.}
+\item{\emph{pca_plot_sphere_df}}{Returns a data frame
+  with information on the frist three principle components and the
+  count number of single windows. Further the plotting radius for
+  the \code{\link{pyramid_3d_window}} function is returned.}
+}
 }
 \description{
 Get the PCA values for sliding window

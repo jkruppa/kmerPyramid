@@ -2,23 +2,32 @@
 % Please edit documentation in R/kmer_pyramid_3d.R
 \name{pyramid_3d}
 \alias{pyramid_3d}
-\title{acgt pyramid 3D plotting function}
+\title{ACGT pyramid 3D plotting function}
 \usage{
 pyramid_3d(df, color = "black", ids = NULL, text = NULL, cex = 1,
   identify = FALSE)
 }
 \arguments{
-\item{df}{}
+\item{df}{Data frame of k-mer freuencies. The single k-mers are
+the columns and the rows indicating different samples, sequence
+reads, or contigs.}
 
-\item{color}{}
+\item{color}{Single value 'black', if all points should be black
+or vector of length \emph{nrow(df)} if all points should be
+colored differently.}
 
-\item{ids}{}
+\item{ids}{If \emph{identify = TRUE} the single points can be
+selected and the given id is shown. Must have the length
+\emph{nrow(df)}.}
 
-\item{text}{}
+\item{text}{Single value 'x', if all points should be printed as
+'x' or vector of length \emph{nrow(df)} if all points should be
+printed by a different letter differently.}
 
-\item{cex}{}
+\item{cex}{Size of the text.}
 
-\item{show.identify}{}
+\item{identify}{Set to TRUE, if points should be identified by
+their \empgh{ids}.}
 }
 \description{
 The acgt pyramid 3D plotting function
