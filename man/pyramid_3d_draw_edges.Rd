@@ -4,7 +4,7 @@
 \alias{pyramid_3d_draw_edges}
 \title{Wrapper for getting the positions of the edges}
 \usage{
-pyramid_3d_draw_edges(pca_edge_df)
+pyramid_3d_draw_edges(pca_edge_df, alpha = 1)
 }
 \arguments{
 \item{pca_edge_df}{}

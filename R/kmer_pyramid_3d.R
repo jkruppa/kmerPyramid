@@ -92,17 +92,21 @@ pyramid_3d <- function(df,
 ##' @param pca_edge_df 
 ##' @return NULL
 ##' @author Jochen Kruppa
-pyramid_3d_draw_edges <- function(pca_edge_df){
+pyramid_3d_draw_edges <- function(pca_edge_df, alpha = 1){
   lines3d(pca_edge_df[c(1,2), c("PC1", "PC2", "PC3")], col = 1)
   lines3d(pca_edge_df[c(1,3), c("PC1", "PC2", "PC3")], col = 1)
   lines3d(pca_edge_df[c(1,4), c("PC1", "PC2", "PC3")], col = 1)
   lines3d(pca_edge_df[c(2,3), c("PC1", "PC2", "PC3")], col = 1)
   lines3d(pca_edge_df[c(2,4), c("PC1", "PC2", "PC3")], col = 1)
   lines3d(pca_edge_df[c(3,4), c("PC1", "PC2", "PC3")], col = 1)
-  text3d(pca_edge_df[1, "PC1"], pca_edge_df[1, "PC2"], pca_edge_df[1, "PC3"], "A", color="black")
-  text3d(pca_edge_df[2, "PC1"], pca_edge_df[2, "PC2"], pca_edge_df[2, "PC3"], "C", color="black")
-  text3d(pca_edge_df[3, "PC1"], pca_edge_df[3, "PC2"], pca_edge_df[3, "PC3"], "G", color="black")
-  text3d(pca_edge_df[4, "PC1"], pca_edge_df[4, "PC2"], pca_edge_df[4, "PC3"], "T", color="black")
+  text3d(pca_edge_df[1, "PC1"], pca_edge_df[1, "PC2"], pca_edge_df[1, "PC3"], "A",
+         color="black", alpha = alpha)
+  text3d(pca_edge_df[2, "PC1"], pca_edge_df[2, "PC2"], pca_edge_df[2, "PC3"], "C",
+         color="black", alpha = alpha)
+  text3d(pca_edge_df[3, "PC1"], pca_edge_df[3, "PC2"], pca_edge_df[3, "PC3"], "G",
+         color="black", alpha = alpha)
+  text3d(pca_edge_df[4, "PC1"], pca_edge_df[4, "PC2"], pca_edge_df[4, "PC3"], "T",
+         color="black", alpha = alpha)
 }
 
 ##' Calculate the PCA with pyramid edges
@@ -199,15 +203,20 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##'                   identify = TRUE)
 ##' 
 ##' pyramid_3d_window(viral_window_list[c(3,5)],
-##'                   difference = TRUE)
+##'                   difference = TRUE,
+##'                   identify = TRUE)
 ##' 
 ##' pyramid_3d_window(viral_window_list[c(3,5)],
 ##'                   difference = TRUE,
+##'                   bw = TRUE,
+##'                   bw.cex = 75,
 ##'                   identify = TRUE)
 pyramid_3d_window <- function(list,
                               color = "black",
                               difference = FALSE,
-                              identify = FALSE)
+                              identify = FALSE,
+                              bw = FALSE,
+                              bw.cex = 10)
 {
   library(rgl)
   if(!difference) {
@@ -245,15 +254,26 @@ pyramid_3d_window <- function(list,
     material3d(back="culled", specular="black")
     bg3d(color = "white")
     par3d(family = "sans", cex = 2)
-    pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df)
-    spheres3d(sphere_plot_diff_df$PC1,
+    if(bw){
+      pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df, alpha = 0.5)
+      texts3d(sphere_plot_diff_df$PC1,
               sphere_plot_diff_df$PC2,
               sphere_plot_diff_df$PC3,
-              alpha = 0.5,
-              col = ifelse(sphere_plot_diff_df$radius_sign == 1,
-                           "blue",
-                           "red"),
-              radius = sphere_plot_diff_df$radius_abs)
+              alpha = 1,
+              color = "black",
+              texts = ifelse(sphere_plot_diff_df$radius_sign == 1, "+", "-"),
+              cex = sphere_plot_diff_df$radius_abs * bw.cex)
+    } else {
+      pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df)
+      spheres3d(sphere_plot_diff_df$PC1,
+                sphere_plot_diff_df$PC2,
+                sphere_plot_diff_df$PC3,
+                alpha = 0.5,
+                col = ifelse(sphere_plot_diff_df$radius_sign == 1,
+                             "blue",
+                             "red"),
+                radius = sphere_plot_diff_df$radius_abs)
+    }
     if(identify){
       bg3d(color = c("white", "black"))
       material3d(color = "black")      

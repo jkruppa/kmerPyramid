@@ -5,7 +5,7 @@
 \title{The k-mer window pyramid 3D plotting function}
 \usage{
 pyramid_3d_window(list, color = "black", difference = FALSE,
-  identify = FALSE)
+  identify = FALSE, bw = FALSE, bw.cex = 10)
 }
 \arguments{
 \item{list}{}
@@ -35,10 +35,13 @@ pyramid_3d_window(viral_window_list[1],
                   identify = TRUE)
 
 pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE)
+                  difference = TRUE,
+                  identify = TRUE)
 
 pyramid_3d_window(viral_window_list[c(3,5)],
                   difference = TRUE,
+                  bw = TRUE,
+                  bw.cex = 75,
                   identify = TRUE)
 }
 \author{
