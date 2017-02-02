@@ -113,3 +113,15 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 <p align="center">
   <img src="img/pyramid_3d_example4.PNG" width="400">
 </p>
+
+```R
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  difference = TRUE,
+                  bw = TRUE,
+                  bw.cex = 75,
+                  identify = TRUE)
+```
+
+<p align="center">
+  <img src="img/pyramid_3d_example5.PNG" width="400">
+</p>
