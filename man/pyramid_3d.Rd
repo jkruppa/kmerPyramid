@@ -27,7 +27,7 @@ printed by a different letter differently.}
 \item{cex}{Size of the text.}
 
 \item{identify}{Set to TRUE, if points should be identified by
-their \empgh{ids}.}
+their \emph{ids}.}
 }
 \description{
 The acgt pyramid 3D plotting function

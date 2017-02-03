@@ -227,6 +227,7 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##'   FALSE]
 ##' @param bw.cex Size of the text symbols in the black and white
 ##'   difference plot.
+##' @param edges A vector of edges which should be printed
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
@@ -251,12 +252,17 @@ get_window_distr <- function(seq, window, prob_flag = TRUE) {
 ##'                   bw = TRUE,
 ##'                   bw.cex = 75,
 ##'                   identify = TRUE)
+##'
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red",
+##'                   edges = c("AT", "CG"))
 pyramid_3d_window <- function(list,
                               color = "black",
                               difference = FALSE,
                               identify = FALSE,
                               bw = FALSE,
-                              bw.cex = 10)
+                              bw.cex = 10,
+                              edges = NULL)
 {
   library(rgl)
   if(!difference) {
@@ -278,6 +284,15 @@ pyramid_3d_window <- function(list,
               alpha = 0.5,
               col = color,
               radius = list[[1]]$pca_plot_sphere_df$count_radius)
+    if(!is.null(edges)){
+      par3d(family = "sans", cex = 1)
+      edges_df <- filter(list[[1]]$pca_plot_sphere_df, ind %in% edges)
+      text3d(edges_df$PC1,
+             edges_df$PC2,
+             edges_df$PC3,
+             edges_df$ind,
+             color="black")
+    }
     if(identify){
       bg3d(color = c("white", "black"))
       material3d(color = "black")      

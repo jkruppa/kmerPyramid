@@ -5,7 +5,7 @@
 \title{The k-mer window pyramid 3D plotting function}
 \usage{
 pyramid_3d_window(list, color = "black", difference = FALSE,
-  identify = FALSE, bw = FALSE, bw.cex = 10)
+  identify = FALSE, bw = FALSE, bw.cex = 10, edges = NULL)
 }
 \arguments{
 \item{list}{List generated of sequences by the function
@@ -29,6 +29,8 @@ FALSE]}
 
 \item{bw.cex}{Size of the text symbols in the black and white
 difference plot.}
+
+\item{edges}{A vector of edges which should be printed}
 }
 \description{
 The k-mer window pyramid 3D plotting function
@@ -57,6 +59,10 @@ pyramid_3d_window(viral_window_list[c(3,5)],
                   bw = TRUE,
                   bw.cex = 75,
                   identify = TRUE)
+
+pyramid_3d_window(viral_window_list[1],
+                  color = "red",
+                  edges = c("AT", "CG"))
 }
 \author{
 Jochen Kruppa
