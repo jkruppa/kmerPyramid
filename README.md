@@ -33,7 +33,7 @@ library(kmerPyramid)
 
 data(viralExampleSeqs)
  
-kmer_distr <- getKmerDistribution(viralExampleSeqs, k = 1)
+kmer_distr <- get_kmer_distribution(viralExampleSeqs, k = 1)
  
 pyramid_3d(kmer_distr,
            cex = 2,
@@ -49,7 +49,7 @@ pyramid_3d(kmer_distr,
  
 data(viralExampleCodingSeq)
  
-kmer_distr <- getKmerDistribution(viralExampleCodingSeq, k = 1)
+kmer_distr <- get_kmer_distribution(viralExampleCodingSeq, k = 1)
 text_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "x", "o")
 color_ids <- ifelse(names(viralExampleCodingSeq) == "non_coding", "black", "red")
  
