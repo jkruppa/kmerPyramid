@@ -7,7 +7,7 @@
 ##' @return data.frame with probability of the k-mers
 ##' @author Jochen Kruppa
 ##' @export
-getKmerDistribution <- function(seq, kmers = c(1,2,3,4,5)){
+get_kmer_distribution <- function(seq, kmers = c(1,2,3,4,5)){
   require(plyr)
   kmerDistList <- llply(kmers, function(kmer){
     countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))
@@ -34,7 +34,7 @@ getKmerDistribution <- function(seq, kmers = c(1,2,3,4,5)){
 ##'     mapping by fingerprinting random clones: A mathematical
 ##'     analysis. Genomics, 2(3), 231-239.
 ##' @export
-getReadsNum <- function(coverage, readLength, genomeSize) {
+get_reads_num <- function(coverage, readLength, genomeSize) {
     floor(coverage * genomeSize / readLength)
 }
 
@@ -55,7 +55,7 @@ getReadsNum <- function(coverage, readLength, genomeSize) {
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
-generatePairedReads <- function(numReads = 10, initSequence, readLength = 150,
+generate_paired_reads <- function(numReads = 10, initSequence, readLength = 150,
                                  readMeanDist = 50, files, parallel_flag = FALSE) {
     ## get the reads
     l_ply(1:numReads, function(...) {

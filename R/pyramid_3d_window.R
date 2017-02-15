@@ -1,0 +1,133 @@
+##' The k-mer window pyramid 3D plotting function
+##'
+##' The k-mer window pyramid 3D plotting function
+##' @title The k-mer window pyramid 3D plotting function
+##' @param list List generated of sequences by the function
+##'   \code{link{get_pca_window_list}}. Only one list entry can be
+##'   plotted at the same time. If two list entries are provided, set
+##'   difference to TRUE to get the difference pyramid.
+##' @param color Single value 'black', if all points should be black
+##'   or vector of length \emph{nrow(df)} if all points should be
+##'   colored differently.
+##' @param difference Should the difference between two list entries
+##'   be calcualted and the difference pyramid be plotted? [default =
+##'   FALSE]
+##' @param identify Set to TRUE, if points should be identified, than
+##'   the k-mer will be shown.
+##' @param bw Black and white plot for the differences [default =
+##'   FALSE]
+##' @param bw.cex Size of the text symbols in the black and white
+##'   difference plot.
+##' @param edges A vector of edges which should be printed
+##' @return NULL
+##' @author Jochen Kruppa
+##' @export
+##' @examples
+##' data(viralExampleSeqs)
+##' 
+##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
+##' 
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red")
+##' 
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red",
+##'                   identify = TRUE)
+##' 
+##' pyramid_3d_window(viral_window_list[c(3,5)],
+##'                   difference = TRUE,
+##'                   identify = TRUE)
+##' 
+##' pyramid_3d_window(viral_window_list[c(3,5)],
+##'                   difference = TRUE,
+##'                   bw = TRUE,
+##'                   bw.cex = 75,
+##'                   identify = TRUE)
+##'
+##' pyramid_3d_window(viral_window_list[1],
+##'                   color = "red",
+##'                   edges = c("AT", "CG"))
+pyramid_3d_window <- function(list,
+                              color = "black",
+                              difference = FALSE,
+                              identify = FALSE,
+                              bw = FALSE,
+                              bw.cex = 10,
+                              edges = NULL)
+{
+  library(rgl)
+  if(!difference) {
+    if(length(list) > 1) stop("Only one sample can be plotted! Choose difference = TRUE if two samples should be compared.")
+    rgl.open()
+    material3d(back="culled", specular="black")
+    bg3d(color = "white")
+    par3d(family = "sans", cex = 2)
+    ## start plotting
+    pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df)
+    lines3d(list[[1]]$pca_plot_list$pca_plot_df$PC1,
+            list[[1]]$pca_plot_list$pca_plot_df$PC2,
+            list[[1]]$pca_plot_list$pca_plot_df$PC3,
+            col = color)
+    ## draw the sphere
+    spheres3d(list[[1]]$pca_plot_sphere_df$PC1,
+              list[[1]]$pca_plot_sphere_df$PC2,
+              list[[1]]$pca_plot_sphere_df$PC3,
+              alpha = 0.5,
+              col = color,
+              radius = list[[1]]$pca_plot_sphere_df$count_radius)
+    if(!is.null(edges)){
+      par3d(family = "sans", cex = 1)
+      edges_df <- filter(list[[1]]$pca_plot_sphere_df, ind %in% edges)
+      text3d(edges_df$PC1,
+             edges_df$PC2,
+             edges_df$PC3,
+             edges_df$ind,
+             color="black")
+    }
+    if(identify){
+      bg3d(color = c("white", "black"))
+      material3d(color = "black")      
+      par3d(family = "sans", cex = 1)
+      identify3d(list[[1]]$pca_plot_sphere_df$PC1,
+                 list[[1]]$pca_plot_sphere_df$PC2,
+                 list[[1]]$pca_plot_sphere_df$PC3,
+                 label = list[[1]]$pca_plot_sphere_df$ind)
+    }
+  } else {
+    if(length(list) != 2) stop("Only two samples can be compared!")
+    sphere_plot_diff_df <- get_diff_values(list)
+    rgl.open()
+    material3d(back="culled", specular="black")
+    bg3d(color = "white")
+    par3d(family = "sans", cex = 2)
+    if(bw){
+      pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df, alpha = 0.5)
+      texts3d(sphere_plot_diff_df$PC1,
+              sphere_plot_diff_df$PC2,
+              sphere_plot_diff_df$PC3,
+              alpha = 1,
+              color = "black",
+              texts = ifelse(sphere_plot_diff_df$radius_sign == 1, "+", "-"),
+              cex = sphere_plot_diff_df$radius_abs * bw.cex)
+    } else {
+      pyramid_3d_draw_edges(list[[1]]$pca_plot_list$pca_edge_df)
+      spheres3d(sphere_plot_diff_df$PC1,
+                sphere_plot_diff_df$PC2,
+                sphere_plot_diff_df$PC3,
+                alpha = 0.5,
+                col = ifelse(sphere_plot_diff_df$radius_sign == 1,
+                             "blue",
+                             "red"),
+                radius = sphere_plot_diff_df$radius_abs)
+    }
+    if(identify){
+      bg3d(color = c("white", "black"))
+      material3d(color = "black")      
+      par3d(family = "sans", cex = 1)
+      identify3d(sphere_plot_diff_df$PC1,
+                 sphere_plot_diff_df$PC2,
+                 sphere_plot_diff_df$PC3,
+                 label = sphere_plot_diff_df$ind)
+    }
+  }
+}

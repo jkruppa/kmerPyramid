@@ -1,0 +1,20 @@
+##' Get the difference in counts between to sequences
+##'
+##' Get the difference in counts between to sequences
+##' @title Get the difference in counts between to sequences
+##' @param list 
+##' @return NULL
+##' @author Jochen Kruppa
+get_diff_values <- function(list){
+  vir_1 <- list[[1]]$pca_plot_sphere_df
+  vir_2 <- list[[2]]$pca_plot_sphere_df
+  joined <- left_join(vir_1, vir_2, by = c("ind" = "ind"))
+  radius_df <- tibble(PC1 = joined$PC1.x,
+                      PC2 = joined$PC2.x,
+                      PC3 = joined$PC3.x,
+                      radius_diff = joined$count_radius.x - joined$count_radius.y,
+                      radius_abs = abs(radius_diff),
+                      radius_sign = sign(radius_diff),
+                      ind = joined$ind)
+  return(radius_df)
+}
