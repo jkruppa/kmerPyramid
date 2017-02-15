@@ -1,10 +1,23 @@
-##' The acgt pyramid 3D plotting function
+##' The acgt pyramid 3D ploting function allows to plot the ACGT
+##' distribution of a given sample into the 3D space by a principle
+##' component analysis.
 ##'
-##' The acgt pyramid 3D plotting function
-##' @title ACGT pyramid 3D plotting function
-##' @param df Data frame of k-mer freuencies. The single k-mers are
+##' The function allows to plot the ACGT distribution of a given
+##' sample into the 3D space using a PCA. The PCA is done by the
+##' function \emph{prcomp} with the default parameters. Further the
+##' function is able to draw the points in different colors and text
+##' symbols. Only points and letters are available. The identify
+##' option allows to identify single points in the 3D plot.
+##'
+##' The sequences must be provided as a DNAStringSet object. See
+##'   \url{https://web.stanford.edu/class/bios221/labs/biostrings/lab_1_biostrings.html}
+##'   for more details and readDNAStringSet() for reading in fasta files.
+##' @title ACGT pyramid 3D ploting function
+##' @param df Data frame of k-mer frequencies. The single k-mers are
 ##'   the columns and the rows indicating different samples, sequence
-##'   reads, or contigs.
+##'   reads, or contigs. See teh function
+##'   \code{link{get_kmer_distribution}} to generate the frequencies
+##'   from a DNA sequence.
 ##' @param color Single value 'black', if all points should be black
 ##'   or vector of length \emph{nrow(df)} if all points should be
 ##'   colored differently.
@@ -14,13 +27,15 @@
 ##' @param text Single value 'x', if all points should be printed as
 ##'   'x' or vector of length \emph{nrow(df)} if all points should be
 ##'   printed by a different letter differently.
-##' @param cex Size of the text.
+##' @param cex Size of the shown text.
 ##' @param identify Set to TRUE, if points should be identified by
 ##'   their \emph{ids}.
 ##' @return NULL
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
+##' ## Read in own DNA sequences by the package Biostrings (see Details for more information)
+##' 
 ##' data(viralExampleSeqs)
 ##' 
 ##' kmer_distr <- get_kmer_distribution(viralExampleSeqs, k = 1)
