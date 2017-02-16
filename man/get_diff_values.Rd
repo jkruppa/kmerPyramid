@@ -24,4 +24,3 @@ This is an internal function.
 \author{
 Jochen Kruppa
 }
-

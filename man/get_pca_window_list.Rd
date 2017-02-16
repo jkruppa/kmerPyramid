@@ -38,4 +38,3 @@ viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 \author{
 Jochen Kruppa
 }
-

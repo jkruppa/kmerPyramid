@@ -28,4 +28,3 @@ Function to read in fastq files
 \author{
 Klaus Jung
 }
-

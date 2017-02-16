@@ -25,4 +25,3 @@ Wrapper for the sliding window k-mer distribution
 \author{
 Jochen Kruppa
 }
-

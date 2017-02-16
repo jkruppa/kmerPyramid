@@ -20,4 +20,3 @@ Function to draw the edges of the 3D pyramid
 \author{
 Jochen Kruppa
 }
-

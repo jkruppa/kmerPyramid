@@ -27,4 +27,3 @@ Calculate the PCA with pyramid edges
 \author{
 Jochen Kruppa
 }
-

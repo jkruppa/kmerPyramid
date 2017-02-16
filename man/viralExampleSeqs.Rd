@@ -21,4 +21,3 @@ A DNAStringSet containing ten randomly choosen viral sequences for
 example purpose.
 }
 \keyword{datasets}
-

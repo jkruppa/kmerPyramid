@@ -21,4 +21,3 @@ A DNAStringSet containing coding and non coding sequences of the
 NC_015230.1 viral strain
 }
 \keyword{datasets}
-

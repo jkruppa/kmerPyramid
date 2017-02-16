@@ -90,4 +90,3 @@ pyramid_3d(kmer_distr,
 \author{
 Jochen Kruppa
 }
-

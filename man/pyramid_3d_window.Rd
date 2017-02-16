@@ -67,4 +67,3 @@ pyramid_3d_window(viral_window_list[1],
 \author{
 Jochen Kruppa
 }
-

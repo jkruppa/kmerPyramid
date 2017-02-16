@@ -23,4 +23,3 @@ Calculates the k-mer distribution of a given sequence
 \author{
 Jochen Kruppa
 }
-

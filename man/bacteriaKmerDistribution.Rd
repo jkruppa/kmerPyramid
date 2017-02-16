@@ -25,4 +25,3 @@ distribution of the nucleic acid bases of bacteria available as
 embl files from NCBI.
 }
 \keyword{datasets}
-

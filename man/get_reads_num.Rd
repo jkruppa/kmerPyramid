@@ -24,12 +24,11 @@ genome size
 \details{
 The calulation is done by the formula of Lander and Waterman (1988).
 }
-\author{
-Jochen Kruppa
-}
 \references{
 Lander, E. S. and Waterman, M. S. (1988). Genomic
     mapping by fingerprinting random clones: A mathematical
     analysis. Genomics, 2(3), 231-239.
 }
-
+\author{
+Jochen Kruppa
+}

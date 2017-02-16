@@ -33,4 +33,3 @@ wanted reads from a given initial genome sequence
 \author{
 Jochen Kruppa
 }
-

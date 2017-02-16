@@ -22,4 +22,3 @@ Test title for later
 \author{
 Klaus Jung
 }
-
