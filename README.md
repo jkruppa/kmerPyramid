@@ -1,15 +1,9 @@
-# Table of Contents
-1. [Installation](#installation)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-
-## Example
-## Example2
-## Third Example
-
-
-
 # kmerPyramid
+
+## Table of Contents
+1. [Installation](#installation)
+2. [Examples](#examples)
+3. [Tutorial](#tutorial)
 
 R package to visualize the acgt or k-mer distribution between samples
 
@@ -136,3 +130,5 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 <p align="center">
   <img src="img/pyramid_3d_example5.PNG" width="400">
 </p>
+
+## Tutorial
