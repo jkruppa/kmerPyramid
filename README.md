@@ -1,5 +1,5 @@
 # Table of Contents
-1. [Installation](#Installation)
+1. [Installation](#installation)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
 
