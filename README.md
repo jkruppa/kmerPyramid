@@ -1,10 +1,5 @@
 # kmerPyramid
 
-## Table of Contents
-1. [Installation](#installation)
-2. [Examples](#examples)
-3. [Tutorial](#tutorial)
-
 R package to visualize the acgt or k-mer distribution between samples
 
 <p align="center">
@@ -12,6 +7,10 @@ R package to visualize the acgt or k-mer distribution between samples
   <img src="img/animated_pyramide.gif" width="400">
 </p>
 
+## Table of Contents
+1. [Installation](#installation)
+2. [Examples](#examples)
+3. [Tutorial](#tutorial)
 
 ## Installation
 
