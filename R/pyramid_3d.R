@@ -1,5 +1,5 @@
 ##' The acgt pyramid 3D ploting function allows to plot the ACGT
-##' distribution of a given sample into the 3D space by a principle
+##' distribution of a given sample into the 3D space by a principal
 ##' component analysis.
 ##'
 ##' The function allows to plot the ACGT distribution of a given
