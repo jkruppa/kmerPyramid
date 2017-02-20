@@ -25,7 +25,7 @@ Or the development version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jkruppa/acgtPyramid")
+devtools::install_github("jkruppa/kmerPyramid")
 ```
 
 ## Examples
