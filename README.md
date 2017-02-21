@@ -132,11 +132,20 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 
 ## Tutorial
 
-We obtain a single random fasta file with three virus sequences under /data/virus.fa. This file can be directly loaded into R by using the package Biostrings. The apckage should be installed automatically by the kmerPyramid package. If not please follow the instructions under https://bioconductor.org/packages/release/bioc/html/Biostrings.html. 
+We obtain a single random fasta file with three virus sequences under /data/virus.fa. This file can be directly loaded into R by using the package Biostrings. The package should be installed automatically by the kmerPyramid package. If not please follow the instructions under https://bioconductor.org/packages/release/bioc/html/Biostrings.html. 
 
 ```R
 library(Biostrings)
 sequence <- readDNAStringSet("https://raw.githubusercontent.com/jkruppa/kmerPyramid/master/data/virus.fa")
+```
+
+```
+R> sequence
+  A DNAStringSet instance of length 3
+    width seq                                               names               
+[1] 10000 CAAATTAAATTCTAAATGTTGAA...CTAGGTCTAATAAAGAATCATTA virus_1
+[2]  8000 CCGCCCCGAGGCCGCGCGTGCTC...CGCCCCGCGCCCCGCGCGCCCGG virus_2
+[3]  6000 GTAAAATGAGAAAAAAAAACCGA...GAGAGTCAGAAAAAAAGAGAAAC virus_3
 ```
 
 ```R
