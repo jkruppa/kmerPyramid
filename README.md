@@ -1,6 +1,6 @@
 # kmerPyramid
 
-R package to visualize the acgt or k-mer distribution between samples
+R package to visualize the acgt or k-mer distribution between samples.
 
 <p align="center">
   <img src="img/kmerPlot.png" width="300">
@@ -131,3 +131,15 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 </p>
 
 ## Tutorial
+
+We obtain a single random fasta file with three virus sequences under /data/virus.fa. This file can be directly loaded into R by using the package Biostrings. The apckage should be installed automatically by the kmerPyramid package. If not please follow the instructions under https://bioconductor.org/packages/release/bioc/html/Biostrings.html. 
+
+```R
+library(Biostrings)
+sequence <- readDNAStringSet("https://raw.githubusercontent.com/jkruppa/kmerPyramid/master/data/virus.fa")
+```
+
+```R
+library(Biostrings)
+sequence <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
+```
