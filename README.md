@@ -168,7 +168,7 @@ library(kmerPyramid)
 viral_window_list <- get_pca_window_list(sequence, window = 5)
 
 ## We compare the sequence 1 to 2
-pyramid_3d_window(viral_window_list[c(3,5)],
+pyramid_3d_window(viral_window_list[c(1, 2)],
                   difference = TRUE,
                   identify = TRUE)
 ```
