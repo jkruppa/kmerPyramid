@@ -139,6 +139,8 @@ library(Biostrings)
 sequence <- readDNAStringSet("https://raw.githubusercontent.com/jkruppa/kmerPyramid/master/data/virus.fa")
 ```
 
+The folloiwng shows the three virus sequences in a DNAStringSet object. The sequences have different lengths and different ACGT contents. For a deeper understanding of the DNAStringSet objects please vists the site https://web.stanford.edu/class/bios221/labs/biostrings/lab_1_biostrings.html. To select single sequences use `sequence[1]` for the first sequence and `names(sequence)` to access the names.
+
 ```
 R> sequence
   A DNAStringSet instance of length 3
