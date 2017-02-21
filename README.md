@@ -157,6 +157,24 @@ It is also possible to read in own fasta files using the path to the single file
 library(Biostrings)
 sequence <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
 ```
+### Compare two sequences
+
+Very often you might want to compare two sequences given their k-mer distribution. In the first step the sequences must be processed by the function `get_pca_window_list()`, where the k-mer disribution of the given window size is computed. **As a rule of thumb, the differences between species start at the 5-mer distribution**. Therefore, it might be feasible to use a window size of 5. 
+
+```R
+library(kmerPyramid)
+
+## We produce the 5-mer distribution 
+viral_window_list <- get_pca_window_list(sequence, window = 5)
+
+## We compare the sequence 1 to 2
+pyramid_3d_window(viral_window_list[c(3,5)],
+                  difference = TRUE,
+                  identify = TRUE)
+```
+<p align="center">
+  <img src="img/tutorial_img_1.PNG" width="400">
+</p>
 
 
 
