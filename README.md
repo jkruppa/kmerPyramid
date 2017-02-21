@@ -172,10 +172,12 @@ pyramid_3d_window(viral_window_list[c(1, 2)],
                   difference = TRUE,
                   identify = TRUE)
 ```
+The following plot will be openend and can be moved by the mouse. The window might a little bit small, so pull it larger.
+
 <p align="center">
   <img src="img/tutorial_img_1.PNG" width="400">
 </p>
 
-
+If you klick with the **right** mouse button on different bubbles you get the assigned k-mer. Like *CCGGG*, *CCCGG*, and *AATTT* in the example picture. It is alsways sequence 1 minus sequence 2. Blue means an increase and red means a decrease of the given k-mer. 
 
 
