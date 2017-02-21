@@ -2,15 +2,15 @@
 
 R package to visualize the acgt or k-mer distribution between samples.
 
-<p align="center">
-  <img src="img/kmerPlot.png" width="300">
-  <img src="img/animated_pyramide.gif" width="300">
-</p>
-
 ## Table of Contents
 1. [Installation](#installation)
 2. [Examples](#examples)
 3. [Tutorial](#tutorial)
+
+<p align="center">
+  <img src="img/kmerPlot.png" width="300">
+  <img src="img/animated_pyramide.gif" width="300">
+</p>
 
 ## Installation
 
