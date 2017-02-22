@@ -134,6 +134,13 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 
 **This ia a R package**. If you have never ever worked with R or a programing language, feel free to visit http://tryr.codeschool.com/ a free online school on R syntax and programing. This will give you a deeper insight than this tutorial is planed for. 
 
+The installation is very simple. Start R and copy and paste the following code. This will isntall `devtools` which is needed to install packages from this GitHub repository. In the next line the kmerPyramid package will be installed. This has only be done once, after installing only use `library(kmerPyramid)` to load the package.
+
+```R
+install.packages("devtools")
+devtools::install_github("jkruppa/kmerPyramid")
+```
+
 We obtain a single random fasta file with three virus sequences under `/data/virus.fa`. This file can be directly loaded into R by using the package Biostrings. The package should be installed automatically by the kmerPyramid package. If not please follow the instructions under https://bioconductor.org/packages/release/bioc/html/Biostrings.html. 
 
 ```R
@@ -182,6 +189,12 @@ viral_window_list <- get_pca_window_list(sequence, window = 5)
 pyramid_3d_window(viral_window_list[c(1, 2)],
                   difference = TRUE,
                   identify = TRUE)
+                  
+## We compare the sequence 1 to 2
+## Without identification
+pyramid_3d_window(viral_window_list[c(1, 2)],
+                  difference = TRUE,
+                  identify = FALSE)         
 ```
 The following plot will be openend and can be moved by the mouse. The window might a little bit small, so pull it larger.
 
