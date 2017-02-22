@@ -188,13 +188,7 @@ viral_window_list <- get_pca_window_list(sequence, window = 5)
 ## We compare the sequence 1 to 2
 pyramid_3d_window(viral_window_list[c(1, 2)],
                   difference = TRUE,
-                  identify = TRUE)
-                  
-## We compare the sequence 1 to 2
-## Without identification
-pyramid_3d_window(viral_window_list[c(1, 2)],
-                  difference = TRUE,
-                  identify = FALSE)         
+                  identify = TRUE)       
 ```
 The following plot will be openend and can be moved by the mouse. The window might a little bit small, so pull it larger.
 
