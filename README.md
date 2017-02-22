@@ -134,7 +134,7 @@ pyramid_3d_window(viral_window_list[c(3,5)],
 
 **This ia a R package**. If you have never ever worked with R or a programing language, feel free to visit http://tryr.codeschool.com/ a free online school on R syntax and programing. This will give you a deeper insight than this tutorial is planed for. 
 
-The installation is very simple. Start R and copy and paste the following code. This will isntall `devtools` which is needed to install packages from this GitHub repository. In the next line the kmerPyramid package will be installed. This has only be done once, after installing only use `library(kmerPyramid)` to load the package.
+The installation is very simple. Start R and copy and paste the following code. This will install `devtools` which is needed to install packages from this GitHub repository. In the next line the kmerPyramid package will be installed. This has only be done once, after installing use `library(kmerPyramid)` to load the package.
 
 ```R
 install.packages("devtools")
