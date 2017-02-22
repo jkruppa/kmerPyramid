@@ -161,11 +161,12 @@ sequence <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
 If you have two files and would like to merge them into one single `DNAStringSet` do the following and go on with `sequence`.
 
 ```R
-sequence_1 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
-sequence_2 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
+sequence_1 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file_sequence_1.txt")
+sequence_2 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file_sequence_2.txt")
 
 sequence <- c(sequence_1, sequence_2)
 ```
+Now you can compare single sequences with each other.
 
 ### Compare two sequences
 
