@@ -157,6 +157,16 @@ It is also possible to read in own fasta files using the path to the single file
 library(Biostrings)
 sequence <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
 ```
+
+If you have two files and would like to merge them into one single `DNAStringSet` do the following and go on with `sequence`.
+
+```R
+sequence_1 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
+sequence_2 <- readDNAStringSet("C:/path/to/my/fasta/my_fasta_file.txt")
+
+sequence <- c(sequence_1, sequence_2)
+```
+
 ### Compare two sequences
 
 Very often you might want to compare two sequences given their k-mer distribution. In the first step the sequences must be processed by the function `get_pca_window_list()`, where the k-mer disribution of the given window size is computed. **As a rule of thumb, the differences between species start at the 5-mer distribution**. Therefore, it might be feasible to use a window size of 5. 
@@ -178,6 +188,6 @@ The following plot will be openend and can be moved by the mouse. The window mig
   <img src="img/tutorial_img_1.PNG" width="400">
 </p>
 
-If you klick with the **right** mouse button on different bubbles you get the assigned k-mer. Like *CCGGG*, *CCCGG*, and *AATTT* in the example picture. It is alsways sequence 1 minus sequence 2. Blue means an increase and red means a decrease of the given k-mer. 
+If you klick with the **right** mouse button on different bubbles you get the assigned k-mer. Like *CCGGG*, *CCCGG*, and *AATTT* in the example picture. It is always sequence 1 minus sequence 2. Blue means an increase and red means a decrease of the given k-mer. 
 
 
