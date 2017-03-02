@@ -83,7 +83,7 @@ library(kmerPyramid)
 
 data(viralExampleSeqs)
 
-viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
+viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 5)
 
 pyramid_3d_window(viral_window_list[1],
                   color = "red")
