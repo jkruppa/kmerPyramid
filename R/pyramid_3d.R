@@ -30,7 +30,9 @@
 ##' @param cex Size of the shown text.
 ##' @param identify Set to TRUE, if points should be identified by
 ##'   their \emph{ids}.
-##' @return NULL
+##' @param classify Sepcify the used classifier: 'kmeans' or 'hclust' 
+##' @param groups Number of assumed groups or 'k' [default = 2]
+##' @return If classify is set a data.frame with predicated group labels.
 ##' @author Jochen Kruppa
 ##' @export
 ##' @examples
@@ -71,17 +73,48 @@
 ##'            text = text_ids,
 ##'            color = color_ids,
 ##'            identify = TRUE)
+##'
+##' Use the build in classification
+##'
+##' pred_df <- pyramid_3d(kmer_distr,
+##'                       cex = 1,
+##'                       text = text_ids,
+##'                       classify = "kmeans")
+##'
+##' pred_df <- pyramid_3d(kmer_distr,
+##'                       cex = 1,
+##'                       text = text_ids,
+##'                       classify = "hclust")
 pyramid_3d <- function(df,
                        color = "black",
                        ids = NULL,
                        text = NULL,
                        cex = 1,
-                       identify = FALSE)
+                       identify = FALSE,
+                       classify = NULL,
+                       groups = 2)
 {
-  require(plyr); require(dplyr)
-  require(rgl)
+  ## default color palette
+  cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
+                  "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+  p_load(plyr, dplyr, rgl)
   ## get the matrix for the edges of the pyramid
   pca_plot_list <- get_pca_plot_list(df)
+  ## get the classification
+  if(!is.null(classify)) {
+    if(!classify %in% c("hclust", "kmeans")) {
+      stop("Classify must be 'hclust' or 'kmeans'")
+    }
+    pred <- switch(classify,
+                   "kmeans" = {
+                     kmeans(df, centers = groups)$cluster
+                   },
+                   "hclust" = {
+                     cutree(hclust(dist(df), method = "average"), groups)
+                   })
+    ## set the new color variable
+    color <- cbbPalette[as.numeric(as.factor(str_c(pred, text)))]
+  }
   ## rgl parameter
   rgl.open()
   material3d(back="culled", specular="black")
@@ -106,5 +139,12 @@ pyramid_3d <- function(df,
     par3d(family = "sans", cex = 1)
     identify3d(pca_plot_list$pca_plot_df,
                label = ids)
+  }
+  if(!is.null(classify)) {
+    if(!is.null(text)) {
+      return(data.frame(pred))
+    } else {
+      return(data.frame(pred, resp = text))
+    }
   }
 }

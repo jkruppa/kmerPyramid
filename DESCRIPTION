@@ -1,6 +1,6 @@
 Package: kmerPyramid
 Title: kmerPyramid: an interactive visualization tool for nucleobase and \textit{k}-mer frequencies
-Version: 0.2.0.17
+Version: 0.2.0.20
 Authors: Jochen Kruppa [aut, cre], Klaus Jung [aut, cre]
 Description: The package `kmerPyramid' is an interactive visualization tool that can be used 1) to study the relation of sequences to each other based on their nucleobase frequencies and 2) to identify conspicuous sequences with an extreme base composition 3) to compare coding and non-coding regions within a species, or 4) inter-species differences. The kmerPyramid is based on principal component analysis (PCA) that is used to project the multi-dimensional matrix of nucleobase and $k$-mer frequencies in the 3-dimensional space.
 Depends:

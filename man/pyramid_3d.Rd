@@ -5,7 +5,7 @@
 \title{ACGT pyramid 3D ploting function}
 \usage{
 pyramid_3d(df, color = "black", ids = NULL, text = NULL, cex = 1,
-  identify = FALSE)
+  identify = FALSE, classify = NULL, groups = 2)
 }
 \arguments{
 \item{df}{Data frame of k-mer frequencies. The single k-mers are
@@ -30,6 +30,13 @@ printed by a different letter differently.}
 
 \item{identify}{Set to TRUE, if points should be identified by
 their \emph{ids}.}
+
+\item{classify}{Sepcify the used classifier: 'kmeans' or 'hclust'}
+
+\item{groups}{Number of assumed groups or 'k' [default = 2]}
+}
+\value{
+If classify is set a data.frame with predicated group labels.
 }
 \description{
 The acgt pyramid 3D ploting function allows to plot the ACGT
@@ -86,6 +93,18 @@ pyramid_3d(kmer_distr,
            text = text_ids,
            color = color_ids,
            identify = TRUE)
+
+Use the build in classification
+
+pred_df <- pyramid_3d(kmer_distr,
+                      cex = 1,
+                      text = text_ids,
+                      classify = "kmeans")
+
+pred_df <- pyramid_3d(kmer_distr,
+                      cex = 1,
+                      text = text_ids,
+                      classify = "hclust")
 }
 \author{
 Jochen Kruppa
