@@ -8,7 +8,7 @@
 ##' @author Jochen Kruppa
 ##' @export
 get_kmer_distribution <- function(seq, kmers = c(1,2,3,4,5)){
-  require(plyr)
+  p_load(plyr, Biostrings, ShortRead)
   kmerDistList <- llply(kmers, function(kmer){
     countDf <- as.data.frame(oligonucleotideFrequency(DNAStringSet(seq), kmer))
     denom <- apply(countDf, 1, sum)
@@ -57,7 +57,8 @@ get_reads_num <- function(coverage, readLength, genomeSize) {
 ##' @export
 generate_paired_reads <- function(numReads = 10, initSequence, readLength = 150,
                                  readMeanDist = 50, files, parallel_flag = FALSE) {
-    ## get the reads
+  p_load(plyr, Biostrings, ShortRead)
+  ## get the reads
     l_ply(1:numReads, function(...) {
         ## distance of the paired reads
         readDist <- rpois(1, readMeanDist)

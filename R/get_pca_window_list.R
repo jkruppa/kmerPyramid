@@ -22,9 +22,7 @@
 ##' 
 ##' viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 2)
 get_pca_window_list <- function(seqs, window = 5) {
-  require(plyr); library(dplyr)
-  require(stringr)
-  require(Biostrings)
+  p_load(plyr, dplyr, Biostrings, ShortRead, stringr)
   pca_list <- llply(seqs, function(x, win_size = window) {
     ## get the kmer sliding window distribution
     window_kmer_prob_df <- get_window_distr(x, window = win_size, prob = TRUE)

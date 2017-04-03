@@ -15,11 +15,11 @@ get_pca_window_list(seqs, window = 5)
 A list per sequence containing the following elements:
   \describe{
 \item{\emph{pca_plot_list}}{Includes a list with the
-  first three principle components of the k-mer fequencies and the
-  first three principle components of the edges of the 3D
+  first three principal components of the k-mer frequencies and the
+  first three principal components of the edges of the 3D
   pyramid.}
 \item{\emph{pca_plot_sphere_df}}{Returns a data frame
-  with information on the frist three principle components and the
+  with information on the frist three principal components and the
   count number of single windows. Further the plotting radius for
   the \code{\link{pyramid_3d_window}} function is returned.}
 }
