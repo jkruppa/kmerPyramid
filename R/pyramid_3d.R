@@ -97,7 +97,11 @@ pyramid_3d <- function(df,
   ## default color palette
   cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
                   "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+  cbb_map <- hashmap(cbbPalette,
+                     c("black", "orange", "lightblue", "green",
+                       "yellow", "darkblue", "red", "violet"))
   p_load(plyr, dplyr, rgl)
+  if(groups > 8) stop("More than eight groups are not supported!")
   ## get the matrix for the edges of the pyramid
   pca_plot_list <- get_pca_plot_list(df)
   ## get the classification
@@ -141,10 +145,10 @@ pyramid_3d <- function(df,
                label = ids)
   }
   if(!is.null(classify)) {
-    if(!is.null(text)) {
-      return(data.frame(pred))
+    if(is.null(ids)) {
+      return(data.frame(pred, color = cbb_map[[color]]))
     } else {
-      return(data.frame(pred, resp = text))
+      return(data.frame(pred, resp = ids, color = cbb_map[[color]]))
     }
   }
 }
