@@ -7,6 +7,7 @@
 ##' @param prob_flag Should the frequencies of the k-mers returned or the counts
 ##' @return Data frame of the k-mer distribution. 
 ##' @author Jochen Kruppa
+##' @export
 get_window_distr <- function(seq, window, prob_flag = TRUE) {
   agct_win_distr <- letterFrequencyInSlidingView(unlist(seq), view.width = window,
                                                  letters = "ACGT", OR = 0, as.prob = prob_flag)

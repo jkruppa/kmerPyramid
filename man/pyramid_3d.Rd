@@ -4,8 +4,8 @@
 \alias{pyramid_3d}
 \title{ACGT pyramid 3D ploting function}
 \usage{
-pyramid_3d(df, color = "black", ids = NULL, text = NULL, cex = 1,
-  identify = FALSE, classify = NULL, groups = 2)
+pyramid_3d(df, type = "points", color = "black", ids = NULL,
+  text = NULL, cex = 1, identify = FALSE, classify = NULL, groups = 2)
 }
 \arguments{
 \item{df}{Data frame of k-mer frequencies. The single k-mers are
@@ -13,6 +13,9 @@ the columns and the rows indicating different samples, sequence
 reads, or contigs. See teh function
 \code{link{get_kmer_distribution}} to generate the frequencies
 from a DNA sequence.}
+
+\item{type}{Choose if single points [default] or lines between the
+points should be shown.}
 
 \item{color}{Single value 'black', if all points should be black
 or vector of length \emph{nrow(df)} if all points should be
@@ -36,7 +39,8 @@ their \emph{ids}.}
 \item{groups}{Number of assumed groups or 'k' [default = 2]}
 }
 \value{
-If classify is set a data.frame with predicated group labels.
+If classify is set a data.frame with predicated group
+  labels.
 }
 \description{
 The acgt pyramid 3D ploting function allows to plot the ACGT
@@ -53,7 +57,8 @@ option allows to identify single points in the 3D plot.
 
 The sequences must be provided as a DNAStringSet object. See
   \url{https://web.stanford.edu/class/bios221/labs/biostrings/lab_1_biostrings.html}
-  for more details and readDNAStringSet() for reading in fasta files.
+  for more details and readDNAStringSet() for reading in fasta
+  files.
 }
 \examples{
 ## Read in own DNA sequences by the package Biostrings (see Details for more information)

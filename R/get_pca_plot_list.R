@@ -11,6 +11,7 @@
 ##' \item{\emph{pca_edge_df}}{Data frame of the first three principle components from the PCA representing the edges of the 3D pyramid}
 ##' }
 ##' @author Jochen Kruppa
+##' @export
 get_pca_plot_list <- function(df){
   edges_mat <- setNames(data.frame(rbind(diag(1,4))), c("A", "C", "G", "T"))
   pca_df <- rbind(edges_mat, df[c("A", "C", "G", "T")])

@@ -2,8 +2,10 @@
 
 export(generate_paired_reads)
 export(get_kmer_distribution)
+export(get_pca_plot_list)
 export(get_pca_window_list)
 export(get_reads_num)
+export(get_window_distr)
 export(pyramid_3d)
 export(pyramid_3d_window)
 export(read.fastq)
