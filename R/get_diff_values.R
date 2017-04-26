@@ -15,9 +15,9 @@ get_diff_values <- function(list){
   radius_df <- tibble(PC1 = joined$PC1.x,
                       PC2 = joined$PC2.x,
                       PC3 = joined$PC3.x,
-                      count_diff = joined$count.x.x - joined$count.x.y,
-                      radius_diff = (0.15/max(abs(count_diff))) * count_diff, 
-                      ## radius_diff = joined$count_radius.x - joined$count_radius.y,
+                      ## count_diff = joined$count.x.x - joined$count.x.y,
+                      ## radius_diff = (0.15/max(abs(count_diff))) * count_diff, 
+                      radius_diff = joined$count_radius.x - joined$count_radius.y,
                       radius_abs = abs(radius_diff),
                       radius_sign = sign(radius_diff),
                       ind = joined$ind)

@@ -114,10 +114,10 @@ pyramid_3d_window <- function(list,
   } else {
     if(length(list) != 2) stop("Only two samples can be compared!")
     sphere_plot_diff_df <- get_diff_values(list)
-    if(max(sphere_plot_diff_df$radius_abs) < 0.15) {
-      fac <- 0.15 / max(sphere_plot_diff_df$radius_abs) 
-      sphere_plot_diff_df$radius_abs <- sphere_plot_diff_df$radius_abs * fac 
-    }
+    ## if(max(sphere_plot_diff_df$radius_abs) < 0.15) {
+    ##   fac <- 0.15 / max(sphere_plot_diff_df$radius_abs) 
+    ##   sphere_plot_diff_df$radius_abs <- sphere_plot_diff_df$radius_abs * fac 
+    ## }
     rgl.open()
     material3d(back="culled", specular="black")
     bg3d(color = "white")
