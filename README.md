@@ -85,45 +85,45 @@ data(viralExampleSeqs)
 
 viral_window_list <- get_pca_window_list(viralExampleSeqs, window = 5)
 
-pyramid_3d_window(viral_window_list[1],
-                  color = "red")
+pyramid_3d_grid(viral_window_list[1],
+                color = "red")
 ```
 <p align="center">
   <img src="img/pyramid_3d_example1.PNG" width="300">
 </p>
 
 ```R
-pyramid_3d_window(viral_window_list[1],
-                  color = "red",
-                  identify = TRUE)
+pyramid_3d_grid(viral_window_list[1],
+                color = "red",
+                identify = TRUE)
 ```
 <p align="center">
   <img src="img/pyramid_3d_example2.PNG" width="300">
 </p>
 
 ```R
-pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE)
+pyramid_3d_grid(viral_window_list[c(3,5)],
+                difference = TRUE)
 ```
 <p align="center">
   <img src="img/pyramid_3d_example3.PNG" width="300">
 </p>
 
 ```R
-pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE,
-                  identify = TRUE)
+pyramid_3d_grid(viral_window_list[c(3,5)],
+                difference = TRUE,
+                identify = TRUE)
 ```
 <p align="center">
   <img src="img/pyramid_3d_example4.PNG" width="400">
 </p>
 
 ```R
-pyramid_3d_window(viral_window_list[c(3,5)],
-                  difference = TRUE,
-                  bw = TRUE,
-                  bw.cex = 75,
-                  identify = TRUE)
+pyramid_3d_grid(viral_window_list[c(3,5)],
+                difference = TRUE,
+                bw = TRUE,
+                bw.cex = 75,
+                identify = TRUE)
 ```
 
 <p align="center">
@@ -186,9 +186,9 @@ library(kmerPyramid)
 viral_window_list <- get_pca_window_list(sequence, window = 5)
 
 ## We compare the sequence 1 to 2
-pyramid_3d_window(viral_window_list[c(1, 2)],
-                  difference = TRUE,
-                  identify = TRUE)       
+pyramid_3d_grid(viral_window_list[c(1, 2)],
+                difference = TRUE,
+                identify = TRUE)       
 ```
 The following plot will be openend and can be moved by the mouse. The window might a little bit small, so pull it larger.
 
