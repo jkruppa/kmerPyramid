@@ -99,6 +99,7 @@ pyramid_3d <- function(df,
                        classify = NULL,
                        groups = 2)
 {
+  require(pacman, hashmap, stringr)
   ## default color palette
   cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73",
                   "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -122,7 +123,7 @@ pyramid_3d <- function(df,
                      cutree(hclust(dist(df), method = "average"), groups)
                    })
     ## set the new color variable
-    color <- cbbPalette[as.numeric(as.factor(str_c(pred, text)))]
+    color <- cbbPalette[as.numeric(as.factor(str_c(pred)))]
   }
   ## rgl parameter
   rgl.open()
