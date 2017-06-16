@@ -14,6 +14,12 @@ R package to visualize the acgt or k-mer distribution between samples.
 
 ## Installation
 
+# Dependencies
+
+```R
+source("http://bioconductor.org/biocLite.R")
+biocLite("ShortRead")
+```
 Get the released version from CRAN:
 
 ```R
